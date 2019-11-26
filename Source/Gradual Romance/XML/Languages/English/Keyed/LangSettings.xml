@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<LanguageData>
+  <AttractionCalculationSetting_title>Attraction Calculation Mode</AttractionCalculationSetting_title>
+  <AttractionCalculationSetting_desc>Change how attraction is calculated. 'Complex' is default, allows for the most sophisticated behavior, but can hurt performance. 'Simplified' is similar to 'complex' but uses simpler calculations. 'Vanilla' approximates vanilla attraction and is the least resource intensive.</AttractionCalculationSetting_desc>
+  <AttractionCalculationSetting_Complex>complex</AttractionCalculationSetting_Complex>
+  <AttractionCalculationSetting_Simplified>simplified</AttractionCalculationSetting_Simplified>
+  <AttractionCalculationSetting_Vanilla>vanilla</AttractionCalculationSetting_Vanilla>
+  <GenderModeSetting_title>Gendered Behavior Mode</GenderModeSetting_title>
+  <GenderModeSetting_desc>This setting changes how gendered behavior works in Rimworld, within the scope of this mod. For example, straight women in Vanilla rimworld are only 15% as likely as men to initiate a romance. You can choose to remove this behavior, or inverse them (so that rules that apply to women now apply to men and vice-versa). Note that this is only for those behavior related to romance.</GenderModeSetting_desc>
+  <GenderModeSetting_Vanilla>vanilla gendered behavior</GenderModeSetting_Vanilla>
+  <GenderModeSetting_None>no gendered behavior</GenderModeSetting_None>
+  <GenderModeSetting_Inverse>reversed gendered behavior</GenderModeSetting_Inverse>
+  <DetailedDebugLog_title>More Detailed Log</DetailedDebugLog_title>
+  <DetailedDebugLog_desc>Prints internal information about how flirts and attraction are calculated to the debug log, for balancing purposes. Guaranteed to spam your debug log to death.</DetailedDebugLog_desc>
+  <BaseRomanceChance_title>Base Romance Modifier</BaseRomanceChance_title>
+  <BaseRomanceChance_desc>Influences the chance to start relationships. Numbers over 100 tend to accelerate relationships, while numbers below slow them down.</BaseRomanceChance_desc>
+  <BaseBreakupChance_title>Base Breakup Modifier</BaseBreakupChance_title>
+  <BaseBreakupChance_desc>Influences the chance to end relationships. Numbers over 100 tend to make relationships more fragile, while numbers below make them more stable.</BaseBreakupChance_desc>
+  <BaseFlirtChance_title>Base Flirt Chance</BaseFlirtChance_title>
+  <BaseFlirtChance_desc>Influences the chance to initiate a flirt. Numbers over 100 make people more flirty, but not necessarily more successful. Below makes them more standoffish and reticent.</BaseFlirtChance_desc>
+  <RomanceSuccessRate_title>Romantic Success Rate</RomanceSuccessRate_title>
+  <RomanceSuccessRate_desc>Influences how likely it is that any given romantic advance succeeds. Numbers over 100 make relationships quicker. Below makes relationships less likely.</RomanceSuccessRate_desc>
+  <SweetheartRate_title>Sweetheart Chance</SweetheartRate_title>
+  <SweetheartRate_desc>Turning this up makes it more likely that two pawns will become sweethearts, as opposed to lovebuddies. Tuning it down does the opposite.</SweetheartRate_desc>
+  <NumberOfRelationships_title>Unpenalized Relationships</NumberOfRelationships_title>
+  <NumberOfRelationships_desc>Pawns with at least this number of relationships find it harder to make new ones. This is only for romantic and semi-romantic relationships. Set this arbitrarily high for a free-for-all.</NumberOfRelationships_desc>
+  <PolygamousWorld_title>Everyone Polygamous</PolygamousWorld_title>
+  <PolygamousWorld_desc>Nobody cares about affairs. Makes the polygamous trait redundant. Somewhat dangerous to toggle on and off during a playthrough.</PolygamousWorld_desc>
+  <InformalLetters_title>Send Informal Letters</InformalLetters_title>
+  <InformalLetters_desc>Send letters when an informal relationship changes. Turn this off if you are getting too much letter spam.</InformalLetters_desc>
+  <UseFacialAttractiveness_title>Use Facial Attractiveness</UseFacialAttractiveness_title>
+  <UseFacialAttractiveness_desc>Gradual Romance produces a facial attractiveness value for each pawn. With this toggled on, Gradual Romance will use that trait instead of the Beauty trait to calculate romance chance.</UseFacialAttractiveness_desc>
+  <FailedToFindFlirt_error>A pawn attempted to flirt, but InteractionWorker_Flirt failed to pick one.</FailedToFindFlirt_error>
+  <FailedToFindReaction_error>A pawn attempted to react to a flirt, but InteractionWorker_Flirt failed to pick a reaction.</FailedToFindReaction_error>
+  <FacialAttractivenessExplanation>Base Facial Attractiveness: </FacialAttractivenessExplanation>
+  <DetailedAttractionLog_title>Detailed Attraction Logs</DetailedAttractionLog_title>
+  <DetailedAttractionLog_desc>Prints attraction calculations to the debug log. Will spam your log big time.</DetailedAttractionLog_desc>
+  <RerollBeautyTraits_title>Reroll Beauty Traits</RerollBeautyTraits_title>
+  <RerollBeautyTraits_desc>Every newly generated pawn has a chance to roll a beauty trait, without replacing any of their current traits. Makes these traits much more frequent, but they are generally less powerful than in vanilla Rimworld.</RerollBeautyTraits_desc>
+  <NoAttractivenessCurve_error>[GRADUAL_ROMANCE] Couldn't find an attractiveness curve for ThingDef {0}.</NoAttractivenessCurve_error>
+</LanguageData>
+

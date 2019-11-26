@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--
+  <PawnRelationDef>
+    <workerClass>Gradual_Romance.PawnRelationWorker_RomanticInterest</workerClass>
+    <defName>RomanticInterest</defName>
+    <label>interest</label>
+    <importance>300</importance>
+    <opinionOffset>5</opinionOffset>
+    <implied>false</implied>
+    <reflexive>false</reflexive>
+  </PawnRelationDef>
+  -->
+
+
+  <PawnRelationDef>
+    <!--<workerClass>Gradual_Romance.PawnRelationWorker_Sweetheart</workerClass>-->
+    <defName>Sweetheart</defName>
+    <label>sweetheart</label>
+    <importance>190</importance>
+    <opinionOffset>10</opinionOffset>
+    <implied>false</implied>
+    <reflexive>true</reflexive>
+  </PawnRelationDef>
+  
+  <PawnRelationDef>
+    <!--<workerClass>Gradual_Romance.PawnRelationWorker_LoveBuddy</workerClass>-->
+    <defName>Lovebuddy</defName>
+    <label>lovebuddy</label>
+    <importance>185</importance>
+    <opinionOffset>5</opinionOffset>
+    <implied>false</implied>
+    <reflexive>true</reflexive>
+  </PawnRelationDef>
+
+  <PawnRelationDef>
+    <!--<workerClass>Gradual_Romance.PawnRelationWorker_LoveFriend</workerClass>-->
+    <defName>Paramour</defName>
+    <label>swain</label>
+    <labelFemale>leman</labelFemale>
+    <importance>192</importance>
+    <diedThought>MyLoverDied</diedThought>
+    <killedThought>KilledMyLover</killedThought>
+    <soldThought>SoldMyLovedOne</soldThought>
+    <opinionOffset>20</opinionOffset>
+    <implied>false</implied>
+    <reflexive>true</reflexive>
+  </PawnRelationDef>
+
+  <PawnRelationDef>
+    <!--<workerClass>Gradual_Romance.PawnRelationWorker_LoveFriend</workerClass>-->
+    <defName>Lovefriend</defName>
+    <label>boyfriend</label>
+    <labelFemale>girlfriend</labelFemale>
+    <importance>195</importance>
+	<diedThought>MyLoverDied</diedThought>
+    <killedThought>KilledMyLover</killedThought>
+	<soldThought>SoldMyLovedOne</soldThought>
+    <opinionOffset>20</opinionOffset>
+    <implied>false</implied>
+    <reflexive>true</reflexive>
+  </PawnRelationDef>
+  
+  <PawnRelationDef>
+    <defName>ExLovefriend</defName>
+    <!--<workerClass>PawnRelationWorker_ExLovefriend</workerClass>-->
+    <label>ex-boyfriend</label>
+	<labelFemale>ex-girlfriend</labelFemale>
+    <importance>125</importance>
+    <opinionOffset>-10</opinionOffset>
+    <implied>false</implied>
+    <reflexive>true</reflexive>
+  </PawnRelationDef>
+
+  <!-- spouse / lover 
+
+  <PawnRelationDef>
+    <workerClass>PawnRelationWorker_Spouse</workerClass>
+    <defName>Spouse</defName>
+    <label>husband</label>
+    <labelFemale>wife</labelFemale>
+    <importance>210</importance>
+    <diedThought>MyHusbandDied</diedThought>
+    <diedThoughtFemale>MyWifeDied</diedThoughtFemale>
+    <killedThought>KilledMySpouse</killedThought>
+    <soldThought>SoldMyLovedOne</soldThought>
+    <opinionOffset>30</opinionOffset>
+    <generationChanceFactor>0.4</generationChanceFactor>
+    <implied>false</implied>
+    <reflexive>true</reflexive>
+  </PawnRelationDef>
+  
+  <PawnRelationDef>
+    <workerClass>PawnRelationWorker_Fiance</workerClass>
+    <defName>Fiance</defName>
+    <label>fiance</label>
+    <labelFemale>fiancée</labelFemale>
+    <importance>205</importance>
+    <diedThought>MyFianceDied</diedThought>
+    <diedThoughtFemale>MyFianceeDied</diedThoughtFemale>
+    <killedThought>KilledMyFiance</killedThought>
+    <soldThought>SoldMyLovedOne</soldThought>
+    <opinionOffset>35</opinionOffset>
+    <generationChanceFactor>0.08</generationChanceFactor>
+    <implied>false</implied>
+    <reflexive>true</reflexive>
+  </PawnRelationDef>
+  
+  <PawnRelationDef>
+    <workerClass>PawnRelationWorker_Lover</workerClass>
+    <defName>Lover</defName>
+    <label>lover</label>
+    <importance>200</importance>
+    <diedThought>MyLoverDied</diedThought>
+    <killedThought>KilledMyLover</killedThought>
+    <soldThought>SoldMyLovedOne</soldThought>
+    <opinionOffset>35</opinionOffset>
+    <generationChanceFactor>0.35</generationChanceFactor>
+    <implied>false</implied>
+    <reflexive>true</reflexive>
+  </PawnRelationDef>
+  
+
+  
+  <PawnRelationDef>
+    <workerClass>PawnRelationWorker_Stepparent</workerClass>
+    <defName>Stepparent</defName>
+    <label>stepfather</label>
+    <labelFemale>stepmother</labelFemale>
+    <importance>150</importance>
+    <opinionOffset>5</opinionOffset>
+    <implied>true</implied>
+  </PawnRelationDef>
+  
+  <PawnRelationDef>
+    <workerClass>PawnRelationWorker_Stepchild</workerClass>
+    <defName>Stepchild</defName>
+    <label>stepson</label>
+    <labelFemale>stepdaughter</labelFemale>
+    <importance>145</importance>
+    <opinionOffset>5</opinionOffset>
+    <implied>true</implied>
+  </PawnRelationDef>
+
+  
+  <PawnRelationDef>
+    <workerClass>PawnRelationWorker_ParentInLaw</workerClass>
+    <defName>ParentInLaw</defName>
+    <label>father-in-law</label>
+    <labelFemale>mother-in-law</labelFemale>
+    <importance>140</importance>
+    <opinionOffset>5</opinionOffset>
+    <implied>true</implied>
+  </PawnRelationDef>
+  
+  <PawnRelationDef>
+    <workerClass>PawnRelationWorker_ChildInLaw</workerClass>
+    <defName>ChildInLaw</defName>
+    <label>son-in-law</label>
+    <labelFemale>daughter-in-law</labelFemale>
+    <importance>135</importance>
+    <opinionOffset>5</opinionOffset>
+    <implied>true</implied>
+  </PawnRelationDef>
+  
+
+  
+  <PawnRelationDef>
+    <defName>ExSpouse</defName>
+    <workerClass>PawnRelationWorker_ExSpouse</workerClass>
+    <label>ex-husband</label>
+    <labelFemale>ex-wife</labelFemale>
+    <importance>130</importance>
+    <opinionOffset>-15</opinionOffset>
+    <generationChanceFactor>0.09</generationChanceFactor>
+    <implied>false</implied>
+    <reflexive>true</reflexive>
+  </PawnRelationDef>
+  
+  <PawnRelationDef>
+    <defName>ExLover</defName>
+    <workerClass>PawnRelationWorker_ExLover</workerClass>
+    <label>ex-lover</label>
+    <importance>125</importance>
+    <opinionOffset>-15</opinionOffset>
+    <generationChanceFactor>0.1</generationChanceFactor>
+    <implied>false</implied>
+    <reflexive>true</reflexive>
+  </PawnRelationDef>
+  
+  -->
+  
+</Defs>
+
+

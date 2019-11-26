@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Defs>
+  <TraitDef>
+    <defName>Aromantic</defName>
+    <conflictingTraits>
+      <li>Codependent</li>
+    </conflictingTraits>
+    <degreeDatas>
+      <li>
+        <label>aromantic</label>
+        <description>{PAWN_nameDef} isn't interested in relationships, short or long term... {PAWN_pronoun} can't be tied down!</description>
+      </li>
+    </degreeDatas>
+  </TraitDef>
+<TraitDef>
+    <defName>GRAsexual</defName>
+    <conflictingTraits>
+      <li>Lecher</li>
+    </conflictingTraits>
+    <degreeDatas>
+      <li>
+        <label>asexual</label>
+        <description>{PAWN_nameDef} isn't interested in lovin', though {PAWN_pronoun} might do it to please {PAWN_possessive} partner, {PAWN_pronoun} won't be happy about it.</description>
+      </li>
+    </degreeDatas>
+  </TraitDef>
+
+  <TraitDef>
+    <defName>Superficial</defName>
+    <conflictingTraits>
+      <li>OpenMinded</li>
+    </conflictingTraits>
+    <degreeDatas>
+      <li>
+        <label>superficial</label>
+        <description>{PAWN_nameDef} makes snap judgments about the appearance of others. {PAWN_pronoun} doesn't like ugly people at all, but will worship beautiful people no matter how rotten they are.</description>
+      </li>
+    </degreeDatas>
+  </TraitDef>
+
+  <TraitDef>
+    <defName>Hopeless</defName>
+    <conflictingTraits>
+      <li>Seductive</li>
+    </conflictingTraits>
+    <degreeDatas>
+      <li>
+        <label>hopeless</label>
+        <description>When it comes to love, {PAWN_nameDef} always says the wrong thing. It will take a miracle for {PAWN_objective} to find a partner.</description>
+      </li>
+    </degreeDatas>
+  </TraitDef>
+
+  <TraitDef>
+    <defName>Seductive</defName>
+    <conflictingTraits>
+      <li>Hopeless</li>
+    </conflictingTraits>
+    <degreeDatas>
+      <li>
+        <label>seductive</label>
+        <description>{PAWN_nameDef} is a real player. {PAWN_pronoun} is skilled at getting people into bed who normally wouldn't consider sleeping with {PAWN_objective}. This could cause all kinds of problems.</description>
+      </li>
+    </degreeDatas>
+    <requiredWorkTags>
+      <li>Social</li>
+    </requiredWorkTags>
+  </TraitDef>
+
+  <TraitDef>
+    <defName>Shy</defName>
+    <conflictingTraits>
+      <li>Seductive</li>
+    </conflictingTraits>
+    <degreeDatas>
+      <li>
+        <label>shy</label>
+        <description>{PAWN_nameDef} suffers from intense social anxiety, and is very unlikely to initiate stressful social interactions.</description>
+      </li>
+    </degreeDatas>
+    <requiredWorkTags>
+      <li>Social</li>
+    </requiredWorkTags>
+  </TraitDef>
+
+  <TraitDef>
+    <defName>Adventurous</defName>
+    <conflictingTraits>
+      <li>Domestic</li>
+    </conflictingTraits>
+    <degreeDatas>
+      <li>
+        <label>adventurous</label>
+        <description>{PAWN_nameDef} likes getting out of {PAWN_possessive} comfort zone to explore. {PAWN_pronoun} likes spending time outside the colony, and gets antsy when {PAWN_pronoun} stays in one place too long.</description>
+      </li>
+    </degreeDatas>
+  </TraitDef>
+
+  <TraitDef>
+    <defName>Domestic</defName>
+    <conflictingTraits>
+      <li>Adventurous</li>
+    </conflictingTraits>
+    <degreeDatas>
+      <li>
+        <label>domestic</label>
+        <description>{PAWN_nameDef} is very comfortable where {PAWN_pronoun} is. {PAWN_nameDef} gets uncomfortable away from the colony, and isn't fond of strangers.</description>
+      </li>
+    </degreeDatas>
+  </TraitDef>
+
+</Defs>
