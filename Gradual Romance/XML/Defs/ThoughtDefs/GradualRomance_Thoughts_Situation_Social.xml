@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+
+  <!--
+  
+  <ThoughtDef>
+    <defName>PrettySuperficial</defName>
+    <thoughtClass>Thought_SituationalSocial</thoughtClass>
+    <workerClass>ThoughtWorker_PrettySuperficial</workerClass>
+    <validWhileDespawned>true</validWhileDespawned>
+    <stages>
+       <li>
+        <label>attractive</label>
+        <baseOpinionOffset>20</baseOpinionOffset>
+      </li>
+      <li>
+        <label>comely</label>
+        <baseOpinionOffset>40</baseOpinionOffset>
+      </li>
+      <li>
+        <label>beautiful</label>
+        <baseOpinionOffset>60</baseOpinionOffset>
+      </li>
+      <li>
+        <label>ethereal beauty</label>
+        <baseOpinionOffset>80</baseOpinionOffset>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+    <ThoughtDef>
+    <defName>UglySuperficial</defName>
+    <thoughtClass>Thought_SituationalSocial</thoughtClass>
+    <workerClass>ThoughtWorker_UglySuperficial</workerClass>
+    <validWhileDespawned>true</validWhileDespawned>
+    <stages>
+      <li>
+        <label>unattractive</label>
+        <baseOpinionOffset>-20</baseOpinionOffset>
+      </li>
+      <li>
+        <label>homely</label>
+        <baseOpinionOffset>-40</baseOpinionOffset>
+      </li>
+      <li>
+        <label>ugly</label>
+        <baseOpinionOffset>-60</baseOpinionOffset>
+      </li>
+      <li>
+        <label>staggeringly ugly</label>
+        <baseOpinionOffset>-80</baseOpinionOffset>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+	<ThoughtDef>
+    <defName>ColdFeetSharingBed</defName>
+    <thoughtClass>Thought_SituationalSocial</thoughtClass>
+    <workerClass>Gradual_Romance.ThoughtWorker_ColdFeetSharingBed</workerClass>
+    <stages>
+      <li>
+        <label>cold feet from sharing bed</label>
+        <description>Things are moving too fast! This relationship isn't strong enough to share a bed.</description>
+		<baseMoodEffect>-1</baseMoodEffect>
+
+      </li>
+	  <li>
+        <label>cold feet from sharing bed</label>
+        <description>Things are moving WAY too fast! This relationship isn't strong enough to share a bed.</description>
+		<baseMoodEffect>-3</baseMoodEffect>
+
+      </li>
+    </stages>
+  </ThoughtDef>
+    
+    -->
+  <!-- affecting opinion 
+
+  <ThoughtDef>
+    <defName>AromanticRelationship</defName>
+    <thoughtClass>Thought_SituationalSocial</thoughtClass>
+    <workerClass>ThoughtWorker_AromanticRelationship</workerClass>
+    <stages>
+      <li>
+        <label>aromantic with a sweetheart</label>
+        <description>Someone is getting a bit too close for comfort. I had better end things before it gets too serious.</description>
+        <baseMoodEffect>-2</baseMoodEffect>
+      </li>
+      <li>
+        <label>aromantic with a relationship</label>
+        <description>I'm better on my own, yet I'm not. What's happening to me?</description>
+        <baseMoodEffect>-5</baseMoodEffect>
+      </li>
+      <li>
+        <label>aromantic with a lover</label>
+        <description>Yikes! I feel the chains tightening around me!</description>
+        <baseMoodEffect>-10</baseMoodEffect>
+      </li>
+      <li>
+        <label>aromantic with a spouse</label>
+        <description>My life has come to an end.</description>
+        <baseMoodEffect>-15</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+-->
+
+  
+  
+  
+</Defs>

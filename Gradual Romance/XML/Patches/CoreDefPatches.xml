@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Patch>
+	<Operation Class="PatchOperationReplace">
+		<success>Normal</success>
+			<xpath>/Defs/InteractionDef[defName="RomanceAttempt"]/workerClass</xpath>
+			<value>
+				<workerClass>Gradual_Romance.InteractionWorker_GRRomanceAttempt</workerClass>
+			</value>
+			
+	</Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <success>Normal</success>
+    <xpath>/Defs/InteractionDef[defName="Breakup"]/workerClass</xpath>
+    <value>
+      <workerClass>Gradual_Romance.InteractionWorker_GRBreakup</workerClass>
+    </value>
+
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <success>Normal</success>
+    <xpath>/Defs/ThoughtDef[defName="WantToSleepWithSpouseOrLover"]/thoughtClass</xpath>
+    <value>
+  <thoughtClass>Gradual_Romance.Thought_GRWantToSleepWithSpouseOrLover</thoughtClass>
+      </value>
+  </Operation>
+
+    <Operation Class="PatchOperationReplace">
+      <success>Normal</success>
+      <xpath>/Defs/ThoughtDef[defName="WantToSleepWithSpouseOrLover"]/workerClass</xpath>
+      <value>
+        <workerClass>Gradual_Romance.ThoughtWorker_GRWantToSleepWithSpouseOrLover</workerClass>
+      </value>
+  </Operation>
+
+ 
+  <Operation Class="PatchOperationReplace">
+    <success>Normal</success>
+    <xpath>/Defs/TraitDef[defName="Beauty"]/degreeDatas</xpath>
+    <value>
+      <degreeDatas>
+        <li>
+          <label>ethereal beauty</label>
+          <description>[PAWN_nameDef] is beautiful to the point where it has become a burden for [PAWN_objective]. [PAWN_pronoun] is the image of perfection, what people aspire to look like. It has become difficult for [PAWN_nameDef] to interact normally with people.</description>
+          <degree>4</degree>
+          <marketValueFactorOffset>1</marketValueFactorOffset>
+        </li>
+        <li>
+          <label>beautiful</label>
+          <description>[PAWN_nameDef] is exceptionally beautiful, with an exotic-yet-familiar facial structure and an arresting gaze. People are attracted to [PAWN_objective] before [PAWN_pronoun] even opens [PAWN_possessive] mouth.</description>
+          <degree>3</degree>
+          <marketValueFactorOffset>0.75</marketValueFactorOffset>
+        </li>
+        <li>
+          <label>comely</label>
+          <description>[PAWN_nameDef] is very easy on the eyes, with full lips and bright eyes, and has no issues attracting attention.</description>
+          <degree>2</degree>
+          <marketValueFactorOffset>0.40</marketValueFactorOffset>
+        </li>
+        <li>
+          <label>attractive</label>
+          <description>[PAWN_nameDef] has a nice face, which predisposes people to like [PAWN_objective].</description>
+          <degree>1</degree>
+          <marketValueFactorOffset>0.20</marketValueFactorOffset>
+        </li>
+        <li>
+          <label>average appearance</label>
+          <description>[PAWN_nameDef] has an unremarkable face, neither predisposing people to like or dislike [PAWN_objective].</description>
+          <degree>0</degree>
+        </li>
+        <li>
+          <label>unattractive</label>
+          <description>[PAWN_nameDef] is mildly unattractive, though no feature of [PAWN_possessive] is particularly awful, [PAWN_pronoun] doesn't make a great first impression.</description>
+          <degree>-1</degree>
+          <marketValueFactorOffset>-0.20</marketValueFactorOffset>
+        </li>
+        <li>
+          <label>homely</label>
+          <description>[PAWN_nameDef] has exaggerated, unattractive features. It's not an insurmountable problem, but [PAWN_pronoun] really has to make up for it in personality.</description>
+          <degree>-2</degree>
+          <marketValueFactorOffset>-0.40</marketValueFactorOffset>
+        </li>
+        <li>
+          <label>ugly</label>
+          <description>It's not polite to stare at [PAWN_nameDef], not that you would want to. [PAWN_nameDef] is quite ugly, and it will be an uphill batte for [PAWN_objective] to find a life partner.</description>
+          <degree>-3</degree>
+          <marketValueFactorOffset>-0.60</marketValueFactorOffset>
+        </li>
+        <li>
+          <label>staggeringly ugly</label>
+          <description>[PAWN_nameDef] is staggeringly ugly. [PAWN_possessive] face looks like a cross between a drawing by an untalented child, a malformed fetus in a jar of formaldehyde, and a piece of modern art. Others must exert conscious effort to look at [PAWN_objective] while conversing.</description>
+          <degree>-4</degree>
+          <marketValueFactorOffset>-0.75</marketValueFactorOffset>
+        </li>
+      </degreeDatas>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <success>Normal</success>
+    <xpath>/Defs/ThoughtDef[defName="Pretty"]/stages</xpath>
+    <value>
+      <stages>
+        <li>
+          <label>attractive</label>
+          <baseOpinionOffset>4</baseOpinionOffset>
+        </li>
+        <li>
+          <label>comely</label>
+          <baseOpinionOffset>8</baseOpinionOffset>
+        </li>
+        <li>
+          <label>beautiful</label>
+          <baseOpinionOffset>16</baseOpinionOffset>
+        </li>
+        <li>
+          <label>ethereal beauty</label>
+          <baseOpinionOffset>32</baseOpinionOffset>
+        </li>
+      </stages>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <success>Normal</success>
+    <xpath>/Defs/ThoughtDef[defName="Ugly"]/stages</xpath>
+    <value>
+      <stages>
+        <li>
+          <label>unattractive</label>
+          <baseOpinionOffset>-4</baseOpinionOffset>
+        </li>
+        <li>
+          <label>homely</label>
+          <baseOpinionOffset>-8</baseOpinionOffset>
+        </li>
+        <li>
+          <label>ugly</label>
+          <baseOpinionOffset>-16</baseOpinionOffset>
+        </li>
+        <li>
+          <label>staggeringly ugly</label>
+          <baseOpinionOffset>-32</baseOpinionOffset>
+        </li>
+      </stages>
+    </value>
+  </Operation>
+
+
+    <Operation Class="PatchOperationAddModExtension">
+      <xpath>Defs/ThingDef[defName="Human"]</xpath>
+      <value>
+        <li Class="Gradual_Romance.XenoRomanceExtension">
+          <peakMaturityAge>45</peakMaturityAge>
+          <!--
+          Extraspecies appeal shouldn't be above 1 or below 0.
+          At 0, the species is repulsive. They will never have relationships outside their own species.
+          At 1, the species is alluring. They have no issues with relationships outside their own species.
+          -->
+          <extraspeciesAppeal>0.8</extraspeciesAppeal>
+          <!--
+          These are definitely not realistic, but you can make your own.
+          -->
+          <sexDriveByAgeCurveMale>
+            <li>
+              <x>18</x>
+              <y>0</y>
+            </li>
+            <li>
+              <x>19</x>
+              <y>3</y>
+            </li>
+            <li>
+              <x>30</x>
+              <y>2</y>
+            </li>
+            <li>
+              <x>65</x>
+              <y>1</y>
+            </li>
+            <li>
+              <x>90</x>
+              <y>0.1</y>
+            </li>
+          </sexDriveByAgeCurveMale>
+          <sexDriveByAgeCurveFemale>
+            <li>
+              <x>18</x>
+              <y>0</y>
+            </li>
+            <li>
+              <x>19</x>
+              <y>3</y>
+            </li>
+            <li>
+              <x>30</x>
+              <y>2</y>
+            </li>
+            <li>
+              <x>65</x>
+              <y>1</y>
+            </li>
+            <li>
+              <x>90</x>
+              <y>0.1</y>
+            </li>
+          </sexDriveByAgeCurveFemale>
+          <attractivenessByAgeCurveMale>
+            <li>
+              <x>18</x>
+              <y>0</y>
+            </li>
+            <li>
+              <x>19</x>
+              <y>1</y>
+            </li>
+            <li>
+              <x>50</x>
+              <y>1</y>
+            </li>
+            <li>
+              <x>65</x>
+              <y>0.5</y>
+            </li>
+            <li>
+              <x>90</x>
+              <y>0.1</y>
+            </li>
+          </attractivenessByAgeCurveMale>
+          <attractivenessByAgeCurveFemale>
+            <li>
+              <x>18</x>
+              <y>0</y>
+            </li>
+            <li>
+              <x>19</x>
+              <y>1</y>
+            </li>
+            <li>
+              <x>50</x>
+              <y>1</y>
+            </li>
+            <li>
+              <x>65</x>
+              <y>0.5</y>
+            </li>
+            <li>
+              <x>90</x>
+              <y>0.1</y>
+            </li>
+          </attractivenessByAgeCurveFemale>
+          <faceCategory>Human</faceCategory>
+          <bodyCategory>Human</bodyCategory>
+          <mindCategory>Human</mindCategory>
+        </li>
+      </value>
+    </Operation>
+
+  <!--
+
+  
+  
+  <ThoughtDef>
+    <defName>Pretty</defName>
+    <thoughtClass>Thought_SituationalSocial</thoughtClass>
+    <workerClass>ThoughtWorker_Pretty</workerClass>
+    <validWhileDespawned>true</validWhileDespawned>
+    <stages>
+      <li>
+        <label>pretty</label>
+        <baseOpinionOffset>20</baseOpinionOffset>
+      </li>
+      <li>
+        <label>beautiful</label>
+        <baseOpinionOffset>40</baseOpinionOffset>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>Ugly</defName>
+    <thoughtClass>Thought_SituationalSocial</thoughtClass>
+    <workerClass>ThoughtWorker_Ugly</workerClass>
+    <validWhileDespawned>true</validWhileDespawned>
+    <stages>
+      <li>
+        <label>ugly</label>
+        <baseOpinionOffset>-20</baseOpinionOffset>
+      </li>
+      <li>
+        <label>staggeringly ugly</label>
+        <baseOpinionOffset>-40</baseOpinionOffset>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+
+
+
+-->
+	
+</Patch>

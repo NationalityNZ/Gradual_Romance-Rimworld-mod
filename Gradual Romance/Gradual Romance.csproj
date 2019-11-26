@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5B216AA3-FFF5-4384-AFD7-8DFDB16A7293}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Gradual_Romance</RootNamespace>
+    <AssemblyName>Gradual Romance</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Assemblies\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="AttractionCalculatorCategoryDefOf.cs" />
+    <Compile Include="AttractionCalculator_FemaleRelationshipReluctance.cs" />
+    <Compile Include="AttractionCalculator_MaleRelationshipReluctance.cs" />
+    <Compile Include="AttractionCalculator_RomanticDrive.cs" />
+    <Compile Include="AttractionCalculator_SexDrive.cs" />
+    <Compile Include="AttractionCalculator_AgeDifference.cs" />
+    <Compile Include="AttractionCalculator_RelationshipLimit.cs" />
+    <Compile Include="AttractionCalculator_Foreigness.cs" />
+    <Compile Include="AttractionCalculator_Youth.cs" />
+    <Compile Include="AttractionCalculator_OldAge.cs" />
+    <Compile Include="AttractionCalculator_Ability.cs" />
+    <Compile Include="AttractionCalculator_Scars.cs" />
+    <Compile Include="AttractionCalculator_Incest.cs" />
+    <Compile Include="AttractionCalculator_Body.cs" />
+    <Compile Include="AttractionCalculator_Xeno.cs" />
+    <Compile Include="AttractionCalculator_Cybernetics.cs" />
+    <Compile Include="AttractionCalculator_Depravity.cs" />
+    <Compile Include="AttractionCalculator_Maleness.cs" />
+    <Compile Include="AttractionCalculator_Popularity.cs" />
+    <Compile Include="AttractionCalculator_Skill.cs" />
+    <Compile Include="AttractionCalculator_Opinion.cs" />
+    <Compile Include="AttractionCalculator_Femaleness.cs" />
+    <Compile Include="AttractionCalculator_Morality.cs" />
+    <Compile Include="AttractionCalculator_AffairReluctance.cs" />
+    <Compile Include="AttractionCalculator_Options.cs" />
+    <Compile Include="AttractionCalculator_Polygamy.cs" />
+    <Compile Include="AttractionCalculator_Beauty.cs" />
+    <Compile Include="AttractionFactorDef.cs" />
+    <Compile Include="AttractionUtility.cs" />
+    <Compile Include="AttractionCalculator.cs" />
+    <Compile Include="AttractionCalculator_Wealth.cs" />
+    <Compile Include="BreakupUtility.cs" />
+    <Compile Include="FlirtReactionDef.cs" />
+    <Compile Include="FlirtReactionDefOf.cs" />
+    <Compile Include="FlirtReactionWorker_Laughter.cs" />
+    <Compile Include="FlirtReactionWorker_Embarrassed.cs" />
+    <Compile Include="FlirtReactionWorker_Shy.cs" />
+    <Compile Include="FlirtReactionWorker_Ignorant.cs" />
+    <Compile Include="FlirtReactionWorker.cs" />
+    <Compile Include="GrammarUtilities.cs" />
+    <Compile Include="Harmony\PawnGenerator.cs" />
+    <Compile Include="Harmony\Psychology_Patches.cs" />
+    <Compile Include="ModdingHooks.cs" />
+    <Compile Include="XenoRomanceExtension.cs" />
+    <Compile Include="InteractionWorker_AskToMoveIn.cs" />
+    <Compile Include="InteractionWorker_GRBreakup.cs" />
+    <Compile Include="JobDriver_AskForLovin.cs" />
+    <Compile Include="LovinUtility.cs" />
+    <Compile Include="PersonalityNodeModifier.cs" />
+    <Compile Include="FlirtStyleDef.cs" />
+    <Compile Include="StatDefOfGR.cs" />
+    <Compile Include="StatWorker_FacialAttractiveness.cs" />
+    <Compile Include="TraitModifier.cs" />
+    <Compile Include="GRPawnComp.cs" />
+    <Compile Include="PersonalityNodeDefOfGR.cs" />
+    <Compile Include="GRHelper.cs" />
+    <Compile Include="Harmony\ThoughtWorker_WantToSleepWithSpouseOrLover.cs" />
+    <Compile Include="Harmony\LovePartnerRelationUtility.cs" />
+    <Compile Include="InteractionWorker_GRRomanceAttempt.cs" />
+    <Compile Include="GRPawnRelationUtility.cs" />
+    <Compile Include="GRCore.cs" />
+    <Compile Include="Harmony\InteractionWorker_RomanceAttempt.cs" />
+    <Compile Include="PawnRelationsDefOfGR.cs" />
+    <Compile Include="PawnRelationWorker_ExLovefriend.cs" />
+    <Compile Include="RulePackDefOfGR.cs" />
+    <Compile Include="ThoughtDefOfGR.cs" />
+    <Compile Include="InteractionWorker_Flirt.cs" />
+    <Compile Include="PawnRelationWorker_LoveBuddy.cs" />
+    <Compile Include="PawnRelationWorker_Lovefriend.cs" />
+    <Compile Include="PawnRelationWorker_RomanticInterest.cs" />
+    <Compile Include="PawnRelationWorker_Sweetheart.cs" />
+    <Compile Include="ThoughtWorker_ColdFeetSharingBed.cs" />
+    <Compile Include="ThoughtWorker_GRWantToSleepWithSpouseOrLover.cs" />
+    <Compile Include="Thought_GRWantToSleepWithSpouseOrLover.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>..\..\..\HugsLib\Assemblies\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\..\..\..\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="HugsLib">
+      <HintPath>..\..\..\HugsLib\Assemblies\HugsLib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Psychology">
+      <HintPath>..\..\..\Psychology\Assemblies\Psychology.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="XML Reference.txt" />
+    <Content Include="XML\About\About.xml" />
+    <Content Include="XML\Defs\AttractionFactorDefs\GradualRomance_AttractionFactors.xml" />
+    <Content Include="XML\Defs\AttractionFactorDefs\GradualRomance_AttractionFactorCategories.xml" />
+    <Content Include="XML\Defs\FlirtReactionDefs\GradualRomance_FlirtReactions.xml" />
+    <Content Include="XML\Defs\FlirtStyleDefs\GradualRomance_FlirtStyles.xml" />
+    <Content Include="XML\Defs\InteractionDefs\GradualRomance_Interactions_Romance.xml" />
+    <Content Include="XML\Defs\RulePackDefs\GradualRomance_RulePacks.xml" />
+    <Content Include="XML\Defs\StatDefs\GradualRomance_StatDefs.xml" />
+    <Content Include="XML\Defs\TaleDefs\GradualRomance_TaleDefs.xml" />
+    <Content Include="XML\Languages\English\Keyed\LangSettings.xml" />
+    <Content Include="XML\Languages\English\Keyed\Letters.xml" />
+    <Content Include="XML\Languages\English\Strings\Words\Crude_Female.txt" />
+    <Content Include="XML\Languages\English\Strings\Words\Crude_Male.txt" />
+    <Content Include="XML\Languages\English\Strings\Words\Insults_Female.txt" />
+    <Content Include="XML\Languages\English\Strings\Words\Insults_Male.txt" />
+    <Content Include="XML\Languages\English\Strings\Words\Lovely_Bodypart.txt" />
+    <Content Include="XML\Patches\CoreDefPatches.xml" />
+    <Content Include="XML\Patches\PawnRelationPatches.xml" />
+    <Content Include="XML\Defs\PawnRelationDefs\GradualRomance_PawnRelations.xml" />
+    <Content Include="XML\Defs\ThoughtDefs\GradualRomance_Thoughts_Memory_Social.xml" />
+    <Content Include="XML\Defs\ThoughtDefs\GradualRomance_Thoughts_Situation_Social.xml" />
+    <Content Include="XML\Defs\ThoughtDefs\GradualRomance_Thoughts_Memory.xml" />
+    <Content Include="XML\Defs\TraitDefs\GradualRomance_Traits.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
