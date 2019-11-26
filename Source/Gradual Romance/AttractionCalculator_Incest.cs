@@ -40,21 +40,6 @@ namespace Gradual_Romance
                 }
             }
             incestFactor = 1f / (Mathf.Abs(relation.incestOpinionOffset) + 1);
-            if (PsycheHelper.PsychologyEnabled(observer))
-            {
-                //Yes, this is intentional.
-                incestFactor *= (2f * (PsycheHelper.Comp(observer).Psyche.GetPersonalityRating(PersonalityNodeDefOfGR.Moralistic)));
-            }
-            //Psychopaths are much more likely to commit incest
-            if (observer.story.traits.HasTrait(TraitDefOf.Psychopath))
-            {
-                incestFactor = Mathf.Pow(incestFactor, 0.3f);
-            }
-            //Lechers are also more likely to commit it, but they're not as bad as psychopaths
-            if (observer.story.traits.HasTrait(TraitDefOfPsychology.Lecher))
-            {
-                incestFactor = Mathf.Pow(incestFactor, 0.7f);
-            }
             return incestFactor;
         }
     }
