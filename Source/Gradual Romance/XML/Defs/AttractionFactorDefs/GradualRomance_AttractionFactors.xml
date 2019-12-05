@@ -452,6 +452,9 @@
       <li>Transhumanist</li>
       <li>BodyPurist</li>
     </requiredTraits>
+    <reversingTraits>
+      <li>BodyPurist</li>
+    </reversingTraits>
     <calculatorClass>Gradual_Romance.AttractionCalculator_Cybernetics</calculatorClass>
     <reasonVeryHigh>{PAWN2_possessive} transcendent cybernetics</reasonVeryHigh>
     <reasonHigh>{PAWN2_possessive} cybernetics</reasonHigh>
@@ -1269,10 +1272,10 @@
       </li>
     </traitImportanceModifiers>
     <lowAttractionTraitModifiers>
-      <li>
+      <!--<li>
         <trait>Xenophile</trait>
         <modifier>0.7</modifier>
-      </li>
+      </li>-->
       <li>
         <trait>OpenMinded</trait>
         <modifier>0.7</modifier>
@@ -1312,7 +1315,7 @@
     <defName>ReactionPositive_Foreigness</defName>
     <rulePack>
       <rulesStrings>
-        <li>sent->[RECIPIENT_pronoun] was drawn by {INITIATOR_possessive} foreign ways.</li>
+        <li>sent->[RECIPIENT_pronoun] was drawn by [INITIATOR_possessive] foreign ways.</li>
       </rulesStrings>
     </rulePack>
   </RulePackDef>
@@ -1321,6 +1324,147 @@
     <rulePack>
       <rulesStrings>
         <li>sent->[RECIPIENT_pronoun] would never accept an advance from a foreigner.</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+
+  <Gradual_Romance.AttractionFactorDef>
+    <defName>Hygiene</defName>
+    <label>hygiene</label>
+    <category>Circumstance</category>
+    <intriguedByText>Intrigued_Hygiene</intriguedByText>
+    <reactionPositiveText>ReactionPositive_Hygiene</reactionPositiveText>
+    <reactionNegativeText>ReactionNegative_Hygiene</reactionNegativeText>
+    <highAttractionPersonalityModifiers>
+      <li>
+        <personalityNode>Moralistic</personalityNode>
+        <reverse>true</reverse>
+      </li>
+    </highAttractionPersonalityModifiers>
+    <lowAttractionPersonalityModifiers>
+      <li>
+        <!--I'll take a shower eventually.-->
+        <personalityNode>LaidBack</personalityNode>
+        <reverse>true</reverse>
+      </li>
+      <li>
+        <!--Big tough mountain men/women don't need showers.-->
+        <personalityNode>Independent</personalityNode>
+        <reverse>true</reverse>
+      </li>
+      <li>
+        <!--Stink is the sign that you go out and do stuff.-->
+        <personalityNode>Adventurous</personalityNode>
+        <reverse>true</reverse>
+      </li>
+      <li>
+        <!--You don't show up to galas without having rinsed thoroughly in cold-pressed soap.-->
+        <personalityNode>Cultured</personalityNode>
+      </li>
+    </lowAttractionPersonalityModifiers>
+    <calculatorClass>Gradual_Romance.AttractionCalculator_Hygiene</calculatorClass>
+    <reasonVeryHigh>{PAWN1_possessive} intoxicating musk</reasonVeryHigh>
+    <reasonHigh>{PAWN1_possessive} lovely musk</reasonHigh>
+    <reasonLow>{PAWN1_possessive} filthiness</reasonLow>
+    <reasonVeryLow>that {PAWN1_nameDef} wretched state of filthiness</reasonVeryLow>
+  </Gradual_Romance.AttractionFactorDef>
+  <RulePackDef>
+    <defName>Intrigued_Hygiene</defName>
+    <rulePack>
+      <rulesStrings>
+        <li>sent->[INITIATOR_pronoun] breathed in deeply [RECIPIENT_possessive] wonderful musk.</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+  <RulePackDef>
+    <defName>ReactionPositive_Hygiene</defName>
+    <rulePack>
+      <rulesStrings>
+        <li>sent->[RECIPIENT_pronoun] could barely think with all that musk.</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+  <RulePackDef>
+    <defName>ReactionNegative_Hygiene</defName>
+    <rulePack>
+      <rulesStrings>
+        <li>sent->[RECIPIENT_pronoun] was shocked by [INITIATOR_possessive] lack of hygiene.</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+
+  <Gradual_Romance.AttractionFactorDef>
+    <defName>Voice</defName>
+    <label>voice</label>
+    <category>Physical</category>
+    <intriguedByText>Intrigued_Voice</intriguedByText>
+    <reactionPositiveText>ReactionPositive_Voice</reactionPositiveText>
+    <reactionNegativeText>ReactionNegative_Voice</reactionNegativeText>
+    <calculatorClass>Gradual_Romance.AttractionCalculator_Voice</calculatorClass>
+    <reasonVeryHigh>{PAWN1_possessive} angelic voice</reasonVeryHigh>
+    <reasonHigh>{PAWN1_possessive} sing-song voice</reasonHigh>
+    <reasonLow>{PAWN1_possessive} annoying voice</reasonLow>
+    <reasonVeryLow>{PAWN1_possessive} grating voice</reasonVeryLow>
+  </Gradual_Romance.AttractionFactorDef>
+  <RulePackDef>
+    <defName>Intrigued_Voice</defName>
+    <rulePack>
+      <rulesStrings>
+        <li>sent->[INITIATOR_pronoun] just wanted to hear [RECIPIENT_possessive] rich, warm voice.</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+  <RulePackDef>
+    <defName>ReactionPositive_Voice</defName>
+    <rulePack>
+      <rulesStrings>
+        <li>sent->[RECIPIENT_pronoun] had to obey [INITIATOR_possessive] musical voice.</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+  <RulePackDef>
+    <defName>ReactionNegative_Voice</defName>
+    <rulePack>
+      <rulesStrings>
+        <li>sent->[RECIPIENT_pronoun] couldn't listen to [INITIATOR_possessive] annoying voice any longer.</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+
+  <Gradual_Romance.AttractionFactorDef>
+    <defName>Breathinging</defName>
+    <label>breathing</label>
+    <category>Physical</category>
+    <intriguedByText>Intrigued_Breathing</intriguedByText>
+    <reactionPositiveText>ReactionPositive_Breathing</reactionPositiveText>
+    <reactionNegativeText>ReactionNegative_Breathing</reactionNegativeText>
+    <calculatorClass>Gradual_Romance.AttractionCalculator_Breathing</calculatorClass>
+    <reasonVeryHigh>{PAWN1_possessive} hearty breath</reasonVeryHigh>
+    <reasonHigh>{PAWN1_possessive} hale breath</reasonHigh>
+    <reasonLow>{PAWN1_possessive} creepy breathing</reasonLow>
+    <reasonVeryLow>{PAWN1_possessive} atrocious breathing</reasonVeryLow>
+  </Gradual_Romance.AttractionFactorDef>
+  <RulePackDef>
+    <defName>Intrigued_Breathing</defName>
+    <rulePack>
+      <rulesStrings>
+        <li>sent->[INITIATOR_pronoun] basked in [RECIPIENT_possessive] powerful breath.</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+  <RulePackDef>
+    <defName>ReactionPositive_Breathing</defName>
+    <rulePack>
+      <rulesStrings>
+        <li>sent->[RECIPIENT_pronoun] basked in [INTITIATOR_possessive] powerful breath.</li>
+      </rulesStrings>
+    </rulePack>
+  </RulePackDef>
+  <RulePackDef>
+    <defName>ReactionNegative_Breathing</defName>
+    <rulePack>
+      <rulesStrings>
+        <li>sent->[RECIPIENT_pronoun] had shivers down [RECIPIENT_possessive] spine listening to [INITIATOR_possessive] breath.</li>
       </rulesStrings>
     </rulePack>
   </RulePackDef>

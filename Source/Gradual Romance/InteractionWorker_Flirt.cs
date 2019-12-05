@@ -34,35 +34,7 @@ namespace Gradual_Romance
         private Pawn lastInitiator = null;
         private Pawn lastRecipient = null;
         private bool successImpossible = false;
-        /*
-         * Exception filling window for Verse.FloatMenu: System.NullReferenceException: Object reference not set to an instance of an object
-  at Gradual_Romance.AttractionUtility.CalculateAttractionCategory (Gradual_Romance.AttractionFactorCategoryDef category, Verse.Pawn observer, Verse.Pawn assessed, System.Collections.Generic.List`1& veryLowFactors, System.Collections.Generic.List`1& lowFactors, System.Collections.Generic.List`1& highFactors, System.Collections.Generic.List`1& veryHighFactors, Gradual_Romance.AttractionFactorDef& reasonForInstantFailure) [0x00000] in <filename unknown>:0 
-  at Gradual_Romance.InteractionWorker_Flirt.CalculateAndSort (Gradual_Romance.AttractionFactorCategoryDef category, Verse.Pawn observer, Verse.Pawn assessed, Boolean observerIsInitiator) [0x00000] in <filename unknown>:0 
-  at Gradual_Romance.InteractionWorker_Flirt.RandomSelectionWeight (Verse.Pawn initiator, Verse.Pawn recipient) [0x00000] in <filename unknown>:0 
-  at RimWorld.SocialCardUtility+<DrawDebugOptions>c__AnonStorey1+<DrawDebugOptions>c__AnonStorey2.<>m__0 (RimWorld.InteractionDef x) [0x00000] in <filename unknown>:0 
-  at System.Linq.Enumerable+<CreateWhereIterator>c__Iterator1D`1[RimWorld.InteractionDef].MoveNext () [0x00000] in <filename unknown>:0 
-  at System.Collections.Generic.List`1[RimWorld.InteractionDef].AddEnumerable (IEnumerable`1 enumerable) [0x00000] in <filename unknown>:0 
-  at System.Collections.Generic.List`1[RimWorld.InteractionDef]..ctor (IEnumerable`1 collection) [0x00000] in <filename unknown>:0 
-  at System.Linq.Enumerable.ToArray[InteractionDef] (IEnumerable`1 source) [0x00000] in <filename unknown>:0 
-  at System.Linq.QuickSort`1[RimWorld.InteractionDef]..ctor (IEnumerable`1 source, System.Linq.SortContext`1 context) [0x00000] in <filename unknown>:0 
-  at System.Linq.QuickSort`1+<Sort>c__Iterator21[RimWorld.InteractionDef].MoveNext () [0x00000] in <filename unknown>:0 
-  at System.Collections.Generic.List`1[RimWorld.InteractionDef].AddEnumerable (IEnumerable`1 enumerable) [0x00000] in <filename unknown>:0 
-  at System.Collections.Generic.List`1[RimWorld.InteractionDef]..ctor (IEnumerable`1 collection) [0x00000] in <filename unknown>:0 
-  at System.Linq.Enumerable.ToList[InteractionDef] (IEnumerable`1 source) [0x00000] in <filename unknown>:0 
-  at RimWorld.SocialCardUtility+<DrawDebugOptions>c__AnonStorey1.<>m__2 () [0x00000] in <filename unknown>:0 
-  at Verse.FloatMenuOption.Chosen (Boolean colonistOrdering, Verse.FloatMenu floatMenu) [0x00000] in <filename unknown>:0 
-  at Verse.FloatMenuOption.DoGUI (Rect rect, Boolean colonistOrdering, Verse.FloatMenu floatMenu) [0x00000] in <filename unknown>:0 
-  at Verse.FloatMenu.DoWindowContents (Rect rect) [0x00000] in <filename unknown>:0 
-  at Verse.Window+<WindowOnGUI>c__AnonStorey0.<>m__0 (Int32 x) [0x00000] in <filename unknown>:0 
-Verse.Log:Error(String, Boolean)
-Verse.<WindowOnGUI>c__AnonStorey0:<>m__0(Int32)
-UnityEngine.GUI:CallWindowDelegate(WindowFunction, Int32, Int32, GUISkin, Int32, Single, Single, GUIStyle)
 
-         * 
-         * 
-         * 
-         * 
-         */
 
         private void EmptyReasons()
         {
@@ -209,9 +181,37 @@ UnityEngine.GUI:CallWindowDelegate(WindowFunction, Int32, Int32, GUISkin, Int32,
                 successImpossible = false;
             }
             FlirtReactionDef flirtReaction = null;
-            List<FlirtReactionDef> allFlirtReactions = DefDatabase<FlirtReactionDef>.AllDefsListForReading;
-            allFlirtReactions.TryRandomElementByWeight((FlirtReactionDef x) => CalculateFlirtReactionWeight(flirtStyle,x,initiator,recipient), out flirtReaction);
-            LogFlirt(recipient.Name.ToStringShort + " chose reaction " + flirtReaction.defName + ".");
+            IEnumerable<FlirtReactionDef> successfulFlirtReactions = (from reaction in DefDatabase<FlirtReactionDef>.AllDefsListForReading
+                                                               where reaction.successful
+                                                               select reaction);
+            IEnumerable<FlirtReactionDef> unsuccessfulFlirtReactions = (from reaction in DefDatabase<FlirtReactionDef>.AllDefsListForReading
+                                                                      where !reaction.successful
+                                                                      select reaction);
+            List < FlirtReactionDef > allFlirtReactions = DefDatabase<FlirtReactionDef>.AllDefsListForReading;
+            FlirtReactionDef successfulFlirt;
+            FlirtReactionDef unsuccessfulFlirt;
+            successfulFlirtReactions.TryRandomElementByWeight((FlirtReactionDef x) => CalculateFlirtReactionWeight(flirtStyle, x, initiator, recipient), out successfulFlirt);
+            unsuccessfulFlirtReactions.TryRandomElementByWeight((FlirtReactionDef x) => CalculateFlirtReactionWeight(flirtStyle,x,initiator,recipient), out unsuccessfulFlirt);
+            if (successImpossible)
+            {
+                flirtReaction = unsuccessfulFlirt;
+            }
+            else
+            {
+                //revise to include flirt type
+                float chance = Mathf.Clamp01(GradualRomanceMod.RomanticSuccessRate * Mathf.Pow(initiatorPhysicalAttraction, flirtStyle.baseSexiness) * Mathf.Pow(initiatorRomanticAttraction, flirtStyle.baseRomance) * Mathf.Pow(initiatorSocialAttraction, flirtStyle.baseLogic) * recipientCircumstances * 0.65f);
+                if (Rand.Value < chance)
+                {
+                    flirtReaction = successfulFlirt;
+                }
+                else
+                {
+                    flirtReaction = unsuccessfulFlirt;
+                }
+                LogFlirt(recipient.Name.ToStringShort + " chose reaction " + flirtReaction.defName + " from Successful: " + successfulFlirt.defName + "; Unsuccessful: " + unsuccessfulFlirt.defName + ".");
+            }
+            
+
             if (flirtReaction == null)
             {
                 Log.Error("FailedToFindReaction_error".Translate());
@@ -269,15 +269,23 @@ UnityEngine.GUI:CallWindowDelegate(WindowFunction, Int32, Int32, GUISkin, Int32,
 
             if (flirtReaction.successful)
             {
-                if (Rand.Value < Mathf.Clamp01(GradualRomanceMod.BaseRomanceChance * .333f))
-                {
-                    GRPawnRelationUtility.AdvanceInformalRelationship(initiator, recipient, out PawnRelationDef newRelation, (flirtStyle.baseSweetheartChance * flirtReaction.sweetheartModifier));
+
+                GRPawnRelationUtility.AdvanceInformalRelationship(initiator, recipient, out PawnRelationDef newRelation, (flirtStyle.baseSweetheartChance * flirtReaction.sweetheartModifier));
                     
-                    if (newRelation != null)
-                    {
-                        string initiatorParagraph = AttractionUtility.WriteReasonsParagraph(initiator, recipient, veryHighInitiatorReasons, highInitiatorReasons, lowInitiatorReasons, veryLowInitiatorReasons);
-                        string recipientParagraph = AttractionUtility.WriteReasonsParagraph(recipient, initiator, veryHighRecipientReasons, highRecipientReasons, lowRecipientReasons, veryLowRecipientReasons);
-                        if (newRelation == PawnRelationDefOfGR.Sweetheart)
+                if (newRelation != null && (PawnUtility.ShouldSendNotificationAbout(initiator) || PawnUtility.ShouldSendNotificationAbout(recipient)))
+                {
+
+                    string initiatorParagraph = AttractionUtility.WriteReasonsParagraph(initiator, recipient, veryHighInitiatorReasons, highInitiatorReasons, lowInitiatorReasons, veryLowInitiatorReasons);
+                    string recipientParagraph = AttractionUtility.WriteReasonsParagraph(recipient, initiator, veryHighRecipientReasons, highRecipientReasons, lowRecipientReasons, veryLowRecipientReasons);
+                    letterDef = LetterDefOf.PositiveEvent;
+                    letterLabel = newRelation.GetModExtension<RomanticRelationExtension>().newRelationshipTitleText.Translate();
+                    letterText = newRelation.GetModExtension<RomanticRelationExtension>().newRelationshipLetterText.Translate(initiator.Named("PAWN1"), recipient.Named("PAWN2"));
+
+
+                    letterText += initiatorParagraph;
+                    letterText += recipientParagraph;
+
+                    /*    if (newRelation == PawnRelationDefOfGR.Sweetheart)
                         {
                             letterDef = LetterDefOf.PositiveEvent;
                             letterLabel = "NewSweetheartsLabel".Translate();
@@ -314,12 +322,11 @@ UnityEngine.GUI:CallWindowDelegate(WindowFunction, Int32, Int32, GUISkin, Int32,
                                 letterLabel = "NewParamoursLabel".Translate();
                                 letterText = "NewParamoursText".Translate(initiator.Named("PAWN1"), recipient.Named("PAWN2"));
                             }
-                        }
-                        letterText += initiatorParagraph;
-                        letterText += recipientParagraph;
+                        }*/
 
-                    }
+
                 }
+                
             }
 
         }

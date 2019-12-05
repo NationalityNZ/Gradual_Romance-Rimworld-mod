@@ -14,8 +14,12 @@ namespace Gradual_Romance
             yetMoreSentencePacks = new List<RulePackDef> { };
             if (reaction.successful)
             {
-                initiator.needs.mood.thoughts.memories.TryGainMemory(ThoughtDefOfGR.RomanticInterest, recipient);
-                recipient.needs.mood.thoughts.memories.TryGainMemory(ThoughtDefOfGR.RomanticInterest, initiator);
+                ThoughtDef thoughtToGive = reaction.givesTension.RandomElement();
+                if (thoughtToGive != null)
+                {
+                    initiator.needs.mood.thoughts.memories.TryGainMemory(thoughtToGive, recipient);
+                    recipient.needs.mood.thoughts.memories.TryGainMemory(thoughtToGive, initiator);
+                }
             }
             else
             {

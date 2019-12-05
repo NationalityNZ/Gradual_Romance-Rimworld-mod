@@ -50,6 +50,9 @@
       </li>
     </personalityModifiers>
     <traitModifiers></traitModifiers>
+    <givesTension>
+      <li>SexualTension</li>
+    </givesTension>
     <baseChance>1</baseChance>
     <sexyReaction>3</sexyReaction>
     <romanticReaction>0.25</romanticReaction>
@@ -94,6 +97,9 @@
         <modifier>2</modifier>
       </li>
     </personalityModifiers>
+    <givesTension>
+      <li>LogicalTension</li>
+    </givesTension>
     <traitModifiers></traitModifiers>
     <baseChance>1</baseChance>
     <sexyReaction>0.5</sexyReaction>
@@ -112,6 +118,10 @@
     <femaleRulePack>Sentence_FlirtReactionCharmed</femaleRulePack>
     <successful>true</successful>
     <traitModifiers></traitModifiers>
+    <givesTension>
+      <li>SexualTension</li>
+      <li>RomanticTension</li>
+    </givesTension>
     <baseChance>1</baseChance>
     <sexyReaction>2</sexyReaction>
     <romanticReaction>2</romanticReaction>
@@ -134,6 +144,9 @@
       </li>
     </personalityModifiers>
     <traitModifiers></traitModifiers>
+    <givesTension>
+      <li>SexualTension</li>
+    </givesTension>
     <baseChance>1</baseChance>
     <sexyReaction>3</sexyReaction>
     <romanticReaction>1</romanticReaction>
@@ -231,6 +244,10 @@
       </li>
     </personalityModifiers>
     <traitModifiers></traitModifiers>
+    <givesTension>
+      <li>SexualTension</li>
+      <li>RomanticTension</li>
+    </givesTension>
     <baseChance>1</baseChance>
     <sexyReaction>3</sexyReaction>
     <romanticReaction>1</romanticReaction>
@@ -321,6 +338,9 @@
         <modifier>2</modifier>
       </li>
     </personalityModifiers>
+    <givesTension>
+      <li>RomanticTension</li>
+    </givesTension>
     <traitModifiers></traitModifiers>
     <baseChance>1</baseChance>
     <sexyReaction>1</sexyReaction>
@@ -367,6 +387,10 @@
       </li>
     </personalityModifiers>
     <traitModifiers></traitModifiers>
+    <givesTension>
+      <li>SexualTension</li>
+      <li>RomanticTension</li>
+    </givesTension>
     <baseChance>1</baseChance>
     <sexyReaction>3</sexyReaction>
     <romanticReaction>2</romanticReaction>
@@ -390,6 +414,10 @@
       </li>
     </personalityModifiers>
     <traitModifiers></traitModifiers>
+    <givesTension>
+      <li>SexualTension</li>
+      <li>RomanticTension</li>
+    </givesTension>
     <baseChance>1</baseChance>
     <sexyReaction>2</sexyReaction>
     <romanticReaction>1</romanticReaction>
@@ -415,6 +443,9 @@
         <modifier>1</modifier>
       </li>
     </personalityModifiers>
+    <givesTension>
+      <li>SexualTension</li>
+    </givesTension>
     <traitModifiers></traitModifiers>
     <baseChance>1</baseChance>
     <sexyReaction>3</sexyReaction>
@@ -738,9 +769,9 @@
       <rulesStrings>
         <li>sent->In response, [RECIPIENT_nameDef] [told] [INITIATOR_objective] [RECIPIENT_possessive] [feelings] for [INITIATOR_objective].</li>
         <li>told->told</li>
-        <li>told->admitted</li>
-        <li>told->declared</li>
-        <li>told->said</li>
+        <li>told->admitted to</li>
+        <li>told->declared to</li>
+        <li>told->announced to</li>
         <li>feelings->feelings</li>
         <li>feelings->affections</li>
         <li>feelings->love</li>

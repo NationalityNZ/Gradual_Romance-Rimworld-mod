@@ -40,6 +40,7 @@ namespace Gradual_Romance
                 }
             }
             incestFactor = 1f / (Mathf.Abs(relation.incestOpinionOffset) + 1);
+
             return incestFactor;
         }
     }

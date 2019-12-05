@@ -25,12 +25,12 @@ namespace Gradual_Romance
             {
                 interpretChance = 0.5f;
             }
-            recipient.needs.mood.thoughts.memories.TryGainMemory(ThoughtDefOfGR.RomanticInterest, initiator);
+            recipient.needs.mood.thoughts.memories.TryGainMemory(ThoughtDefOfGR.RomanticTension, initiator);
 
             if (Rand.Value < interpretChance)
             {
                 yetMoreSentencePacks.Add(RulePackDefOfGR.Sentence_InterpretFlirtPositively);
-                initiator.needs.mood.thoughts.memories.TryGainMemory(ThoughtDefOfGR.RomanticInterest, recipient);
+                initiator.needs.mood.thoughts.memories.TryGainMemory(ThoughtDefOfGR.RomanticTension, recipient);
             }
             else
             {

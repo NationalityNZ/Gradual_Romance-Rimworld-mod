@@ -155,6 +155,8 @@ namespace Gradual_Romance
                     }
                 }
             }
+            
+            //Patches
 
         }
         
@@ -163,7 +165,8 @@ namespace Gradual_Romance
             
                 XenoRomanceExtension xenoRomance = new XenoRomanceExtension() { };
                 float maxAge = pawnType.race.lifeExpectancy;
-                xenoRomance.peakMaturityAge = (maxAge * 0.5f); 
+                xenoRomance.youngAdultAge = (maxAge * 0.15f);
+                xenoRomance.midlifeAge = (maxAge * 0.5f); 
                 //xenoRomance.subspeciesOf = null;
                 xenoRomance.extraspeciesAppeal = 0.5f;
                 xenoRomance.sexDriveByAgeCurveFemale.Add(new Vector2(maxAge * 0.15f, 0));
@@ -237,6 +240,25 @@ namespace Gradual_Romance
             return null;
         }
 
+        //CHECK MODS
+        /*
+        public static bool UsingDubsBadHygiene()
+        {
+            try
+            {
+                if (LoadedModManager.RunningModsListForReading.Any(x=> x.Name == "Dubs Bad Hygiene"))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+            catch (TypeLoadException ex) { return false; }
+        }
+        */
 
         private static Dictionary<ThingDef, SimpleCurve> maleSexDriveCurves = new Dictionary<ThingDef, SimpleCurve> { };
 

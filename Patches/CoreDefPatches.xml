@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
+<!--
+
+INTERACTION PATCHES
+
+-->
+
+
 <Patch>
 	<Operation Class="PatchOperationReplace">
 		<success>Normal</success>
@@ -66,11 +73,6 @@
           <marketValueFactorOffset>0.20</marketValueFactorOffset>
         </li>
         <li>
-          <label>average appearance</label>
-          <description>[PAWN_nameDef] has an unremarkable face, neither predisposing people to like or dislike [PAWN_objective].</description>
-          <degree>0</degree>
-        </li>
-        <li>
           <label>unattractive</label>
           <description>[PAWN_nameDef] is mildly unattractive, though no feature of [PAWN_possessive] is particularly awful, [PAWN_pronoun] doesn't make a great first impression.</description>
           <degree>-1</degree>
@@ -105,19 +107,19 @@
       <stages>
         <li>
           <label>attractive</label>
-          <baseOpinionOffset>4</baseOpinionOffset>
+          <baseOpinionOffset>3</baseOpinionOffset>
         </li>
         <li>
           <label>comely</label>
-          <baseOpinionOffset>8</baseOpinionOffset>
+          <baseOpinionOffset>6</baseOpinionOffset>
         </li>
         <li>
           <label>beautiful</label>
-          <baseOpinionOffset>16</baseOpinionOffset>
+          <baseOpinionOffset>12</baseOpinionOffset>
         </li>
         <li>
           <label>ethereal beauty</label>
-          <baseOpinionOffset>32</baseOpinionOffset>
+          <baseOpinionOffset>24</baseOpinionOffset>
         </li>
       </stages>
     </value>
@@ -130,36 +132,75 @@
       <stages>
         <li>
           <label>unattractive</label>
-          <baseOpinionOffset>-4</baseOpinionOffset>
+          <baseOpinionOffset>-3</baseOpinionOffset>
         </li>
         <li>
           <label>homely</label>
-          <baseOpinionOffset>-8</baseOpinionOffset>
+          <baseOpinionOffset>-6</baseOpinionOffset>
         </li>
         <li>
           <label>ugly</label>
-          <baseOpinionOffset>-16</baseOpinionOffset>
+          <baseOpinionOffset>-12</baseOpinionOffset>
         </li>
         <li>
           <label>staggeringly ugly</label>
-          <baseOpinionOffset>-32</baseOpinionOffset>
+          <baseOpinionOffset>-24</baseOpinionOffset>
         </li>
       </stages>
     </value>
   </Operation>
 
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThoughtDef[defName="Pretty"]/nullifyingTraits</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>/Defs/ThoughtDef[defName="Pretty"]</xpath>
+      <value>
+        <nullifyingTraits>
+          <li>Superficial</li>
+        </nullifyingTraits>
+      </value>
+    </nomatch>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/ThoughtDef[defName="Pretty"]/nullifyingTraits</xpath>
+      <value>
+        <li>Superficial</li>
+      </value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThoughtDef[defName="Ugly"]/nullifyingTraits</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>/Defs/ThoughtDef[defName="Ugly"]</xpath>
+      <value>
+        <nullifyingTraits>
+          <li>Superficial</li>
+        </nullifyingTraits>
+      </value>
+    </nomatch>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/ThoughtDef[defName="Ugly"]/nullifyingTraits</xpath>
+      <value>
+        <li>Superficial</li>
+      </value>
+    </match>
+  </Operation>
 
-    <Operation Class="PatchOperationAddModExtension">
+
+
+  <Operation Class="PatchOperationAddModExtension">
       <xpath>Defs/ThingDef[defName="Human"]</xpath>
       <value>
         <li Class="Gradual_Romance.XenoRomanceExtension">
-          <peakMaturityAge>45</peakMaturityAge>
+          <youngAdultAge>18</youngAdultAge>
+          <midlifeAge>40</midlifeAge>
+          <minimumAgeDeviation>1</minimumAgeDeviation>
+          <maximumAgeDeviation>10</maximumAgeDeviation>
           <!--
           Extraspecies appeal shouldn't be above 1 or below 0.
           At 0, the species is repulsive. They will never have relationships outside their own species.
           At 1, the species is alluring. They have no issues with relationships outside their own species.
           -->
-          <extraspeciesAppeal>0.8</extraspeciesAppeal>
+          <extraspeciesAppeal>0.75</extraspeciesAppeal>
           <!--
           These are definitely not realistic, but you can make your own.
           -->
@@ -257,10 +298,117 @@
         </li>
       </value>
     </Operation>
+  
+  <Operation Class="PatchOperationAddModExtension">
+      <xpath>Defs/BodyTypeDef[defName="Fat"]</xpath>
+      <value>
+        <li Class="Gradual_Romance.GRBodyTypeExtension">
+          <attractivenessFactor>0.75</attractivenessFactor>
+        </li>
+      </value>
+    </Operation>
+  
+      <Operation Class="PatchOperationAddModExtension">
+      <xpath>Defs/BodyTypeDef[defName="Hulk"]</xpath>
+      <value>
+        <li Class="Gradual_Romance.GRBodyTypeExtension">
+          <attractivenessFactor>0.75</attractivenessFactor>
+        <attractiveForGender>Male</attractiveForGender>
+        </li>
+      </value>
+    </Operation>
+    
+    <Operation Class="PatchOperationAddModExtension">
+      <xpath>Defs/BodyTypeDef[defName="Thin"]</xpath>
+      <value>
+        <li Class="Gradual_Romance.GRBodyTypeExtension">
+          <attractivenessFactor>0.75</attractivenessFactor>
+        <attractiveForGender>Female</attractiveForGender>
+        </li>
+      </value>
+    </Operation>
+
+  <!--
+        public string newRelationshipLetterText;
+        public string newRelationshipTitleText;
+        public PawnRelationDef ex;
+    
+    -->
+  
+  
+  <Operation Class="PatchOperationAddModExtension">
+    <xpath>Defs/PawnRelationDef[defName="Lover"]</xpath>
+    <value>
+      <li Class="Gradual_Romance.RomanticRelationExtension">
+        <relationshipLevel>15</relationshipLevel>
+        <baseAffairReluctance>0.3</baseAffairReluctance>
+        <isFormalRelationship>true</isFormalRelationship>
+        <goesOnDates>true</goesOnDates>
+        <sharesBed>true</sharesBed>
+        <doesLovin>true</doesLovin>
+        <caresAboutCheating>true</caresAboutCheating>
+        <ex>ExLover</ex>
+      </li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAddModExtension">
+    <xpath>Defs/PawnRelationDef[defName="Fiance"]</xpath>
+    <value>
+      <li Class="Gradual_Romance.RomanticRelationExtension">
+        <relationshipLevel>20</relationshipLevel>
+        <baseAffairReluctance>0.1</baseAffairReluctance>
+        <isFormalRelationship>true</isFormalRelationship>
+        <goesOnDates>true</goesOnDates>
+        <sharesBed>true</sharesBed>
+        <doesLovin>true</doesLovin>
+        <caresAboutCheating>true</caresAboutCheating>
+        <ex>ExLover</ex>
+      </li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAddModExtension">
+    <xpath>Defs/PawnRelationDef[defName="Spouse"]</xpath>
+    <value>
+      <li Class="Gradual_Romance.RomanticRelationExtension">
+        <relationshipLevel>25</relationshipLevel>
+        <baseAffairReluctance>0.3</baseAffairReluctance>
+        <isFormalRelationship>true</isFormalRelationship>
+        <goesOnDates>true</goesOnDates>
+        <sharesBed>true</sharesBed>
+        <doesLovin>true</doesLovin>
+        <caresAboutCheating>true</caresAboutCheating>
+        <needsDivorce>true</needsDivorce>
+        <ex>ExSpouse</ex>
+      </li>
+    </value>
+  </Operation>
+  
+  
+  <!-- MOD EXTENSIONS -->
 
   <!--
 
-  
+      <modExtensions>
+      <Gradual_Romance.RomanticRelationExtension>
+        <relationshipLevel>2</relationshipLevel>
+        <baseAffairReluctance>0.5</baseAffairReluctance>
+        <isFormalRelationship>false</isFormalRelationship>
+        <goesOnDates>true</goesOnDates>
+        <sharesBed>false</sharesBed>
+        <doesLovin>true</doesLovin>
+        <caresAboutCheating>false</caresAboutCheating>
+        <conditions>
+          <li>
+            <thought>SexualTension</thought>
+            <numberRequired>3</numberRequired>
+          </li>
+          <li>
+            <thought>RomanticTension</thought>
+            <numberRequired>3</numberRequired>
+          </li>
+        </conditions>
+      </Gradual_Romance.RomanticRelationExtension>
+    </modExtensions>
   
   <ThoughtDef>
     <defName>Pretty</defName>

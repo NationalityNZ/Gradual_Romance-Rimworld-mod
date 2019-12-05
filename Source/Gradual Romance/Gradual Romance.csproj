@@ -53,7 +53,10 @@
     <Compile Include="AttractionCalculatorCategoryDefOf.cs" />
     <Compile Include="AttractionCalculator_FemaleRelationshipReluctance.cs" />
     <Compile Include="AttractionCalculator_MaleRelationshipReluctance.cs" />
+    <Compile Include="AttractionCalculator_Breathing.cs" />
+    <Compile Include="AttractionCalculator_Voice.cs" />
     <Compile Include="AttractionCalculator_RomanticDrive.cs" />
+    <Compile Include="AttractionCalculator_Hygiene.cs" />
     <Compile Include="AttractionCalculator_SexDrive.cs" />
     <Compile Include="AttractionCalculator_AgeDifference.cs" />
     <Compile Include="AttractionCalculator_RelationshipLimit.cs" />
@@ -93,6 +96,11 @@
     <Compile Include="Harmony\PawnGenerator.cs" />
     <Compile Include="Harmony\Psychology_Patches.cs" />
     <Compile Include="ModdingHooks.cs" />
+    <Compile Include="ThoughtWorker_UglySuperficial.cs" />
+    <Compile Include="ThoughtWorker_PrettySuperficial.cs" />
+    <Compile Include="TraitDefOfGR.cs" />
+    <Compile Include="GRBodyTypeExtension.cs" />
+    <Compile Include="RomanticRelationExtension.cs" />
     <Compile Include="XenoRomanceExtension.cs" />
     <Compile Include="InteractionWorker_AskToMoveIn.cs" />
     <Compile Include="InteractionWorker_GRBreakup.cs" />
@@ -106,7 +114,7 @@
     <Compile Include="GRPawnComp.cs" />
     <Compile Include="PersonalityNodeDefOfGR.cs" />
     <Compile Include="GRHelper.cs" />
-    <Compile Include="Harmony\ThoughtWorker_WantToSleepWithSpouseOrLover.cs" />
+    <Compile Include="Harmony\ThoughtPatches.cs" />
     <Compile Include="Harmony\LovePartnerRelationUtility.cs" />
     <Compile Include="InteractionWorker_GRRomanceAttempt.cs" />
     <Compile Include="GRPawnRelationUtility.cs" />

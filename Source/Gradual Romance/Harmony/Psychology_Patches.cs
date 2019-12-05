@@ -22,7 +22,11 @@ namespace Gradual_Romance.Harmony
             SimpleCurve curve = GradualRomanceMod.GetSexDriveCurveFor(___pawn);
             if (curve != null)
             {
-                __result = Mathf.Clamp01(curve.Evaluate(___pawn.ageTracker.AgeBiologicalYearsFloat) * Mathf.InverseLerp(0f, 0.5f, __instance.sexDrive));
+                __result = curve.Evaluate(___pawn.ageTracker.AgeBiologicalYearsFloat) * Mathf.InverseLerp(0f, 0.5f, __instance.sexDrive);
+                if (___pawn.def.GetModExtension<XenoRomanceExtension>().canGoIntoHeat == false)
+                {
+                    __result = Mathf.Clamp01(__result);
+                }
             }
         }
     }

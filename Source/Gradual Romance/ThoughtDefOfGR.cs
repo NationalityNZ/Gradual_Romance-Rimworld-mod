@@ -10,7 +10,13 @@ namespace Gradual_Romance
 
         public static ThoughtDef RomanticDisinterest;
 
-        public static ThoughtDef ColdFeetSharingBed;
+        public static ThoughtDef RomanticTension;
+
+        public static ThoughtDef SexualTension;
+
+        public static ThoughtDef LogicalTension;
+
+        //public static ThoughtDef ColdFeetSharingBed;
 
         public static ThoughtDef BotchedFlirt;
 

@@ -3,16 +3,31 @@
 
   <!--
   <PawnRelationDef>
-    <workerClass>Gradual_Romance.PawnRelationWorker_RomanticInterest</workerClass>
-    <defName>RomanticInterest</defName>
-    <label>interest</label>
-    <importance>300</importance>
-    <opinionOffset>5</opinionOffset>
-    <implied>false</implied>
-    <reflexive>false</reflexive>
+    public class RomanticRelationExtension : DefModExtension
+    {
+        public float baseAffairReluctance = 1f;
+        public bool isFormalRelationship;
+        public bool goesOnDates;
+        public bool sharesBed;
+        public bool doesLovin;
+        public bool caresAboutCheating;
+        public List<ThoughtCondition> conditions = new List<ThoughtCondition>() { };
+        public int relationshipLevel;
+    }
+
+    public class ThoughtCondition
+    {
+        public ThoughtDef thought;
+        public int numberRequired;
+    }
   </PawnRelationDef>
   -->
-
+  <!--
+        public string newRelationshipLetterText;
+        public string newRelationshipTitleText;
+        public PawnRelationDef ex;
+    
+    -->
 
   <PawnRelationDef>
     <!--<workerClass>Gradual_Romance.PawnRelationWorker_Sweetheart</workerClass>-->
@@ -22,6 +37,25 @@
     <opinionOffset>10</opinionOffset>
     <implied>false</implied>
     <reflexive>true</reflexive>
+    <modExtensions>
+      <li Class ="Gradual_Romance.RomanticRelationExtension">
+        <newRelationshipLetterText>NewSweetheartsText</newRelationshipLetterText>
+        <newRelationshipTitleText>NewSweetheartsLabel</newRelationshipTitleText>
+        <relationshipLevel>1</relationshipLevel>
+        <baseAffairReluctance>0.85</baseAffairReluctance>
+        <isFormalRelationship>false</isFormalRelationship>
+        <goesOnDates>true</goesOnDates>
+        <sharesBed>false</sharesBed>
+        <doesLovin>false</doesLovin>
+        <caresAboutCheating>false</caresAboutCheating>
+        <conditions>
+          <li>
+            <thought>RomanticTension</thought>
+            <numberRequired>2</numberRequired>
+          </li>
+        </conditions>
+      </li>
+    </modExtensions>
   </PawnRelationDef>
   
   <PawnRelationDef>
@@ -32,6 +66,25 @@
     <opinionOffset>5</opinionOffset>
     <implied>false</implied>
     <reflexive>true</reflexive>
+      <modExtensions>
+        <li Class ="Gradual_Romance.RomanticRelationExtension">
+          <newRelationshipLetterText>NewLovebuddiesText</newRelationshipLetterText>
+          <newRelationshipTitleText>NewLovebuddiesLabel</newRelationshipTitleText>
+          <relationshipLevel>1</relationshipLevel>
+          <baseAffairReluctance>1</baseAffairReluctance>
+          <isFormalRelationship>false</isFormalRelationship>
+          <goesOnDates>false</goesOnDates>
+          <sharesBed>false</sharesBed>
+          <doesLovin>true</doesLovin>
+          <caresAboutCheating>false</caresAboutCheating>
+          <conditions>
+            <li>
+              <thought>SexualTension</thought>
+              <numberRequired>2</numberRequired>
+            </li>
+          </conditions>
+        </li>
+      </modExtensions>
   </PawnRelationDef>
 
   <PawnRelationDef>
@@ -46,6 +99,29 @@
     <opinionOffset>20</opinionOffset>
     <implied>false</implied>
     <reflexive>true</reflexive>
+    <modExtensions>
+      <li Class ="Gradual_Romance.RomanticRelationExtension">
+        <newRelationshipLetterText>NewParamoursText</newRelationshipLetterText>
+        <newRelationshipTitleText>NewParamoursLabel</newRelationshipTitleText>
+        <relationshipLevel>2</relationshipLevel>
+        <baseAffairReluctance>0.75</baseAffairReluctance>
+        <isFormalRelationship>false</isFormalRelationship>
+        <goesOnDates>true</goesOnDates>
+        <sharesBed>false</sharesBed>
+        <doesLovin>true</doesLovin>
+        <caresAboutCheating>false</caresAboutCheating>
+        <conditions>
+          <li>
+            <thought>SexualTension</thought>
+            <numberRequired>2</numberRequired>
+          </li>
+          <li>
+            <thought>RomanticTension</thought>
+            <numberRequired>2</numberRequired>
+          </li>
+        </conditions>
+      </li>
+    </modExtensions>
   </PawnRelationDef>
 
   <PawnRelationDef>
@@ -60,6 +136,18 @@
     <opinionOffset>20</opinionOffset>
     <implied>false</implied>
     <reflexive>true</reflexive>
+    <modExtensions>
+      <li Class ="Gradual_Romance.RomanticRelationExtension">
+        <ex>ExLovefriend</ex>
+        <relationshipLevel>10</relationshipLevel>
+        <baseAffairReluctance>0.5</baseAffairReluctance>
+        <isFormalRelationship>true</isFormalRelationship>
+        <goesOnDates>true</goesOnDates>
+        <sharesBed>false</sharesBed>
+        <doesLovin>true</doesLovin>
+        <caresAboutCheating>true</caresAboutCheating>
+      </li>
+    </modExtensions>
   </PawnRelationDef>
   
   <PawnRelationDef>

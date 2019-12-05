@@ -16,11 +16,13 @@ namespace Gradual_Romance
             {
                 return false;
             }
+            /*
 
             if (!observer.story.traits.HasTrait(TraitDefOf.BodyPurist) || !assessed.story.traits.HasTrait(TraitDefOf.Transhumanist))
             {
                 return false;
             }
+            */
 
             if (assessed.health.hediffSet.CountAddedParts() <= 0)
             {
@@ -48,11 +50,11 @@ namespace Gradual_Romance
             }
             valueOfParts = Mathf.Max(valueOfParts, 1f);
             cyberFactor = Mathf.Pow(valueOfParts, ValueDampener);
-            if (observer.story.traits.HasTrait(TraitDefOf.BodyPurist))
+            /*if (observer.story.traits.HasTrait(TraitDefOf.BodyPurist))
             {
                 cyberFactor = Mathf.Pow(valueOfParts, -1);
             }
-            
+            */
             return 1f;
         }
 

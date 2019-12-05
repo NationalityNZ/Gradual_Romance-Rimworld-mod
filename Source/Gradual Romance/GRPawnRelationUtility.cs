@@ -14,7 +14,6 @@ namespace Gradual_Romance
         {
             return (pawn.story.traits.HasTrait(Psychology.TraitDefOfPsychology.Polygamous) || GradualRomanceMod.polygamousWorld);
         }
-
         public static List<PawnRelationDef> ListOfBreakupRelationships()
         {
             List<PawnRelationDef> list = new List<PawnRelationDef> { PawnRelationDefOf.Fiance, PawnRelationDefOf.Lover, PawnRelationDefOfGR.Lovefriend, PawnRelationDefOfGR.Paramour, PawnRelationDefOfGR.Lovebuddy };
@@ -30,13 +29,11 @@ namespace Gradual_Romance
             List<PawnRelationDef> list = new List<PawnRelationDef> { PawnRelationDefOf.Spouse, PawnRelationDefOf.Fiance, PawnRelationDefOf.Lover, PawnRelationDefOfGR.Lovefriend };
             return list;
         }
-
         public static List<PawnRelationDef> ListOfRomanceAndExStages()
         {
             List<PawnRelationDef> list = new List<PawnRelationDef> { PawnRelationDefOf.Spouse, PawnRelationDefOf.ExSpouse, PawnRelationDefOf.Fiance, PawnRelationDefOf.Lover, PawnRelationDefOf.ExLover, PawnRelationDefOfGR.Lovefriend, PawnRelationDefOfGR.ExLovefriend, PawnRelationDefOfGR.Paramour, PawnRelationDefOfGR.Sweetheart, PawnRelationDefOfGR.Lovebuddy };
             return list;
         }
-
         public static Pawn PawnWithMostAdvancedRelationship(Pawn pawn, out PawnRelationDef relation, bool mostLikedLover = true)
         {
             List<PawnRelationDef> listOfRomanceStages = ListOfRomanceStages();
@@ -70,7 +67,6 @@ namespace Gradual_Romance
             }
             return lover;
         }
-
         //returns the most logical romance stage for the given romance stage.
         public static PawnRelationDef NextRomanceStage(PawnRelationDef currentStage)
         {
@@ -114,8 +110,6 @@ namespace Gradual_Romance
             }
             return null;
         }
-
-
         public static PawnRelationDef MostAdvancedRelationshipBetween(Pawn pawn, Pawn other)
         {
             List<PawnRelationDef> listOfRomanceStages = ListOfRomanceStages();
@@ -130,7 +124,6 @@ namespace Gradual_Romance
             }
             return null;
         }
-
         public static bool IsAnAffair(Pawn pawn, Pawn other, out Pawn pawnSO, out Pawn otherSO)
         {
             pawnSO = null;
@@ -139,6 +132,10 @@ namespace Gradual_Romance
             List<PawnRelationDef> listOfFormalRelationships = ListOfFormalRelationships();
             for (int i = 0; i < listOfFormalRelationships.Count(); i++)
             {
+                if (!CaresAboutCheating(listOfFormalRelationships[i]))
+                {
+                    continue;
+                }
                 List<Pawn> pawns = GetAllPawnsWithGivenRelationshipTo(pawn, listOfFormalRelationships[i]);
                 for (int i2 = 0; i2 < pawns.Count(); i2++)
                 {
@@ -179,7 +176,6 @@ namespace Gradual_Romance
             }
             return false;
         }
-
         public static PawnRelationDef CurrentRomanceStage(Pawn pawn, Pawn other)
         {
             List<PawnRelationDef> listOfRomanceStages = ListOfRomanceStages();
@@ -204,61 +200,99 @@ namespace Gradual_Romance
             }
             return null;
         }
-
         public static float AffairReluctance(PawnRelationDef currentStage)
         {
-            if (currentStage == PawnRelationDefOf.Spouse)
+            try
             {
-                return 0.3f;
+                return currentStage.GetModExtension<RomanticRelationExtension>().baseAffairReluctance;
             }
-            else if (currentStage == PawnRelationDefOf.Fiance)
-            {
-                return 0.1f;
-            }
-            else if (currentStage == PawnRelationDefOf.Lover)
-            {
-                return 0.3f;
-            }
-            else if (currentStage == PawnRelationDefOfGR.Lovefriend)
-            {
-                return 0.5f;
-            }
-            else if (currentStage == PawnRelationDefOfGR.Paramour)
-            {
-                return 0.75f;
-            }
-            else if (currentStage == PawnRelationDefOfGR.Sweetheart)
-            {
-                return 0.85f;
-            }
-            else
+            catch (NullReferenceException)
             {
                 return 1f;
             }
         }
         public static bool IsRomanticOrSexualRelationship(PawnRelationDef pawnRelation)
         {
-            return (LovePartnerRelationUtility.IsLovePartnerRelation(pawnRelation) || pawnRelation == PawnRelationDefOfGR.Lovebuddy || pawnRelation == PawnRelationDefOfGR.Sweetheart || pawnRelation == PawnRelationDefOfGR.Paramour);
+            try
+            {
+                return (pawnRelation.GetModExtension<RomanticRelationExtension>().goesOnDates || pawnRelation.GetModExtension<RomanticRelationExtension>().doesLovin);
+            }
+            catch (NullReferenceException)
+            {
+                return false;
+            }
         }
         public static bool IsRomanticRelationship(PawnRelationDef pawnRelation)
         {
-            return (LovePartnerRelationUtility.IsLovePartnerRelation(pawnRelation) || pawnRelation == PawnRelationDefOfGR.Sweetheart || pawnRelation == PawnRelationDefOfGR.Paramour);
+            try
+            {
+                return (pawnRelation.GetModExtension<RomanticRelationExtension>().goesOnDates);
+            }
+            catch (NullReferenceException)
+            {
+                return false;
+            }
         }
         public static bool IsSexualRelationship(PawnRelationDef pawnRelation)
         {
-            return (LovePartnerRelationUtility.IsLovePartnerRelation(pawnRelation) || pawnRelation == PawnRelationDefOfGR.Lovebuddy || pawnRelation == PawnRelationDefOfGR.Paramour);
+            try
+            {
+                return (pawnRelation.GetModExtension<RomanticRelationExtension>().doesLovin);
+            }
+            catch (NullReferenceException)
+            {
+                return false;
+            }
         }
         public static bool IsInformalRelationship(PawnRelationDef pawnRelation)
         {
-            return (pawnRelation == PawnRelationDefOfGR.Sweetheart || pawnRelation == PawnRelationDefOfGR.Lovebuddy || pawnRelation == PawnRelationDefOfGR.Paramour);
+            try
+            {
+                return (!pawnRelation.GetModExtension<RomanticRelationExtension>().isFormalRelationship);
+            }
+            catch (NullReferenceException)
+            {
+                return false;
+            }
         }
         public static bool HasInformalRelationship(Pawn pawn, Pawn other)
         {
-            return (pawn.relations.GetDirectRelation(PawnRelationDefOfGR.Lovebuddy, other) != null || pawn.relations.GetDirectRelation(PawnRelationDefOfGR.Sweetheart, other) != null || pawn.relations.GetDirectRelation(PawnRelationDefOfGR.Paramour, other) != null) ;
+            PawnRelationDef relation = CurrentRomanceStage(pawn, other);
+            if (relation == null)
+            {
+                return false;
+            }
+            try
+            {
+                return (!relation.GetModExtension<RomanticRelationExtension>().isFormalRelationship);
+            }
+            catch (NullReferenceException)
+            {
+                return false;
+            }
+            
+        }
+        public static bool CaresAboutCheating(PawnRelationDef pawnRelation)
+        {
+            try
+            {
+                return (pawnRelation.GetModExtension<RomanticRelationExtension>().caresAboutCheating);
+            }
+            catch (NullReferenceException)
+            {
+                return false;
+            }
         }
         public static bool IsBedSharingRelationship(PawnRelationDef pawnRelation)
         {
-            return (pawnRelation == PawnRelationDefOf.Spouse || pawnRelation == PawnRelationDefOf.Fiance || pawnRelation == PawnRelationDefOf.Lover);
+            try
+            {
+                return (pawnRelation.GetModExtension<RomanticRelationExtension>().sharesBed);
+            }
+            catch (NullReferenceException)
+            {
+                return false;
+            }
         }
         public static List<Pawn> GetAllPawnsWithGivenRelationshipTo (Pawn pawn, PawnRelationDef relation)
         {
@@ -274,7 +308,6 @@ namespace Gradual_Romance
             }
             return pawnList;
         }
-
         public static List<Pawn> GetAllPawnsRomanticWith(Pawn pawn)
         {
             List<PawnRelationDef> relationsList = ListOfRomanceStages();
@@ -291,9 +324,9 @@ namespace Gradual_Romance
         }
         public static bool ShouldShareBed(Pawn pawn, Pawn other)
         {
-            return pawn.relations.DirectRelationExists(PawnRelationDefOf.Spouse, other) || pawn.relations.DirectRelationExists(PawnRelationDefOf.Fiance, other) || pawn.relations.DirectRelationExists(PawnRelationDefOf.Lover, other);
+            PawnRelationDef relation = CurrentRomanceStage(pawn, other);
+            return IsBedSharingRelationship(relation);
         }
-        //returns the most liked character who the pawn should/is sleeping with
         public static DirectPawnRelation MostLikedBedSharingRelationship(Pawn pawn, bool allowDead)
         {
             if (!pawn.RaceProps.IsFlesh)
@@ -330,7 +363,6 @@ namespace Gradual_Romance
             }
             return null;
         }
-
         public static void AdvanceRelationship(Pawn pawn, Pawn other, PawnRelationDef newRelation)
         {
             PawnRelationDef oldRelation = MostAdvancedRelationshipBetween(pawn, other);
@@ -344,7 +376,105 @@ namespace Gradual_Romance
             }
         }
         //TODO Should add more sophisticated behavior
+        public static int NumberOfFriends(Pawn pawn)
+        {
+            if (pawn.MapHeld != null && pawn.IsColonist)
+            { 
+            IEnumerable<Pawn> allPawns = pawn.MapHeld.mapPawns.FreeColonists;
+            int numOfFriends = (from friend in allPawns
+                                        where (friend != pawn && friend.IsColonist && !friend.Dead && friend.relations.OpinionOf(pawn) >= Pawn_RelationsTracker.FriendOpinionThreshold)
+                                        select friend).Count();
+                return numOfFriends;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+        public static bool RelationshipCanEvolveTo(Pawn pawn, Pawn other, PawnRelationDef newRelation)
+        {
+            List<ThoughtCondition> conditions;
+            try
+            {
+                conditions = newRelation.GetModExtension<RomanticRelationExtension>().conditions;
+            }
+            catch (NullReferenceException)
+            {
+                return false;
+            }
+            if (conditions.NullOrEmpty())
+            {
+                return false;
+            }
+            if (!AttractionUtility.IsAgeAppropriate(pawn) || !AttractionUtility.IsAgeAppropriate(other))
+            {
+                try
+                {
+                    if (newRelation.GetModExtension<RomanticRelationExtension>().doesLovin)
+                    {
+                        return false;
+                    }
+                }
+                catch (NullReferenceException)
+                {
+                    return false;
+                }
+            }
+            for (int i = 0; i < conditions.Count(); i++)
+            {
+                Log.Message(conditions[i].thought.defName + ": " + pawn.needs.mood.thoughts.memories.NumMemoriesOfDef(conditions[i].thought).ToString() + " " + other.needs.mood.thoughts.memories.NumMemoriesOfDef(conditions[i].thought) + " needs " + conditions[i].numberRequired.ToString());
+                if (pawn.needs.mood.thoughts.memories.NumMemoriesOfDef(conditions[i].thought) < conditions[i].numberRequired || other.needs.mood.thoughts.memories.NumMemoriesOfDef(conditions[i].thought) < conditions[i].numberRequired)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        public static int GetRelationLevel(PawnRelationDef relation)
+        {
+            try
+            {
+                return (relation.GetModExtension<RomanticRelationExtension>().relationshipLevel);
+            }
+            catch (NullReferenceException)
+            {
+                return -1;
+            }
+        }
         public static void AdvanceInformalRelationship(Pawn pawn, Pawn other, out PawnRelationDef newRelation, float sweetheartChance = 0.5f)
+        {
+            PawnRelationDef oldRelation = MostAdvancedRelationshipBetween(pawn, other);
+            //if (!IsInformalRelationship(oldRelation))
+            newRelation = null;
+            int targetLevel = 1;
+            if (oldRelation != null && IsInformalRelationship(oldRelation))
+            {
+                targetLevel = (oldRelation.GetModExtension<RomanticRelationExtension>().relationshipLevel + 1);
+            }
+            IEnumerable<PawnRelationDef> candidateRelations = from relation in DefDatabase<PawnRelationDef>.AllDefsListForReading
+                                                              where GetRelationLevel(relation) == targetLevel
+                                                              select relation;
+            if (candidateRelations.Count() > 0)
+            {
+                foreach(PawnRelationDef relation in candidateRelations)
+                {
+                    Log.Message("Testing " + relation.defName);
+                    if (RelationshipCanEvolveTo(pawn,other,relation))
+                    {
+                        if (oldRelation != null)
+                        {
+                            pawn.relations.TryRemoveDirectRelation(oldRelation, other);
+                        }
+
+                        pawn.relations.AddDirectRelation(relation, other);
+                        newRelation = relation;
+                        break;
+                    }
+                }
+            }
+        }
+        /*
+        public static bool TryAdvanceInformalRelationship(Pawn pawn, Pawn other, out PawnRelationDef newRelation, float sweetheartChance = 0.5f)
         {
             PawnRelationDef oldRelation = MostAdvancedRelationshipBetween(pawn, other);
             newRelation = null;
@@ -382,31 +512,6 @@ namespace Gradual_Romance
                 newRelation = PawnRelationDefOfGR.Paramour;
             }
         }
-        /// <summary>
-        /// Returns the number of colonist friends (pawns with opinions higher than 20) that a given pawn has. If the pawn is not a colonist, this is returned as -1.
-        /// </summary>
-        /// <param name="pawn">pawn to be evaluated</param>
-        /// <returns>number of friends</returns>
-        public static int NumberOfFriends(Pawn pawn)
-        {
-            if (pawn.MapHeld != null && pawn.IsColonist)
-            { 
-            IEnumerable<Pawn> allPawns = pawn.MapHeld.mapPawns.FreeColonists;
-            int numOfFriends = (from friend in allPawns
-                                        where (friend != pawn && friend.IsColonist && !friend.Dead && friend.relations.OpinionOf(pawn) >= Pawn_RelationsTracker.FriendOpinionThreshold)
-                                        select friend).Count();
-                return numOfFriends;
-            }
-            else
-            {
-                return -1;
-            }
-        }
-
-//        public static bool ShouldAdvanceRelationship(Pawn pawn, Pawn other, float modifier = 1f)
-//        {
-//
-//            if Rand.Value > 
-//        }
+        */
     }
 }

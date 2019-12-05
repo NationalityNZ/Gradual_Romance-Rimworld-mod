@@ -11,7 +11,7 @@ namespace Gradual_Romance
     {
         public override bool Check(Pawn observer, Pawn assessed)
         {
-            return (assessed.ageTracker.AgeBiologicalYearsFloat >= assessed.def.GetModExtension<XenoRomanceExtension>().peakMaturityAge);
+            return (assessed.ageTracker.AgeBiologicalYearsFloat >= assessed.def.GetModExtension<XenoRomanceExtension>().midlifeAge);
         }
         public override float Calculate(Pawn observer, Pawn assessed)
         {
