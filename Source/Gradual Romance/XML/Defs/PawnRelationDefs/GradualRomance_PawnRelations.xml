@@ -42,6 +42,7 @@
         <newRelationshipLetterText>NewSweetheartsText</newRelationshipLetterText>
         <newRelationshipTitleText>NewSweetheartsLabel</newRelationshipTitleText>
         <relationshipLevel>1</relationshipLevel>
+        <decayable>true</decayable>
         <baseAffairReluctance>0.85</baseAffairReluctance>
         <isFormalRelationship>false</isFormalRelationship>
         <goesOnDates>true</goesOnDates>
@@ -72,6 +73,7 @@
           <newRelationshipTitleText>NewLovebuddiesLabel</newRelationshipTitleText>
           <relationshipLevel>1</relationshipLevel>
           <baseAffairReluctance>1</baseAffairReluctance>
+          <decayable>true</decayable>
           <isFormalRelationship>false</isFormalRelationship>
           <goesOnDates>false</goesOnDates>
           <sharesBed>false</sharesBed>
@@ -105,6 +107,7 @@
         <newRelationshipTitleText>NewParamoursLabel</newRelationshipTitleText>
         <relationshipLevel>2</relationshipLevel>
         <baseAffairReluctance>0.75</baseAffairReluctance>
+        <decayable>true</decayable>
         <isFormalRelationship>false</isFormalRelationship>
         <goesOnDates>true</goesOnDates>
         <sharesBed>false</sharesBed>

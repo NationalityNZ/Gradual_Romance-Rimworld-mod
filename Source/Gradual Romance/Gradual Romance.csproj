@@ -93,6 +93,7 @@
     <Compile Include="FlirtReactionWorker_Ignorant.cs" />
     <Compile Include="FlirtReactionWorker.cs" />
     <Compile Include="GrammarUtilities.cs" />
+    <Compile Include="GRThoughtUtility.cs" />
     <Compile Include="Harmony\PawnGenerator.cs" />
     <Compile Include="Harmony\Psychology_Patches.cs" />
     <Compile Include="ModdingHooks.cs" />

@@ -423,7 +423,8 @@ namespace Gradual_Romance
             for (int i = 0; i < conditions.Count(); i++)
             {
                 Log.Message(conditions[i].thought.defName + ": " + pawn.needs.mood.thoughts.memories.NumMemoriesOfDef(conditions[i].thought).ToString() + " " + other.needs.mood.thoughts.memories.NumMemoriesOfDef(conditions[i].thought) + " needs " + conditions[i].numberRequired.ToString());
-                if (pawn.needs.mood.thoughts.memories.NumMemoriesOfDef(conditions[i].thought) < conditions[i].numberRequired || other.needs.mood.thoughts.memories.NumMemoriesOfDef(conditions[i].thought) < conditions[i].numberRequired)
+                
+                if (GRThoughtUtility.NumOfMemoriesOfDefWhereOtherPawnIs(pawn, other, conditions[i].thought) < conditions[i].numberRequired || GRThoughtUtility.NumOfMemoriesOfDefWhereOtherPawnIs(other, pawn, conditions[i].thought) < conditions[i].numberRequired)
                 {
                     return false;
                 }
@@ -473,45 +474,11 @@ namespace Gradual_Romance
                 }
             }
         }
-        /*
-        public static bool TryAdvanceInformalRelationship(Pawn pawn, Pawn other, out PawnRelationDef newRelation, float sweetheartChance = 0.5f)
+        public static int LevelOfSexualTension(Pawn pawn, Pawn other)
         {
-            PawnRelationDef oldRelation = MostAdvancedRelationshipBetween(pawn, other);
-            newRelation = null;
-            if (oldRelation == null)
-            {
-                if (AttractionUtility.IsAgeAppropriate(pawn) && AttractionUtility.IsAgeAppropriate(other))
-                {
-                    if (Rand.Value < sweetheartChance)
-                    {
-                        pawn.relations.AddDirectRelation(PawnRelationDefOfGR.Sweetheart, other);
-                        other.relations.AddDirectRelation(PawnRelationDefOfGR.Sweetheart, pawn);
-                        newRelation = PawnRelationDefOfGR.Sweetheart;
-                    }
-                    else
-                    {
-                        pawn.relations.AddDirectRelation(PawnRelationDefOfGR.Lovebuddy, other);
-                        other.relations.AddDirectRelation(PawnRelationDefOfGR.Lovebuddy, pawn);
-                        newRelation = PawnRelationDefOfGR.Lovebuddy;
-                    }
-
-                }
-                else
-                {
-                    pawn.relations.AddDirectRelation(PawnRelationDefOfGR.Sweetheart, other);
-                    other.relations.AddDirectRelation(PawnRelationDefOfGR.Sweetheart, pawn);
-                    newRelation = PawnRelationDefOfGR.Sweetheart;
-                }
-            }
-            else if (oldRelation == PawnRelationDefOfGR.Lovebuddy || oldRelation == PawnRelationDefOfGR.Sweetheart)
-            {
-                pawn.relations.TryRemoveDirectRelation(oldRelation, other);
-                other.relations.TryRemoveDirectRelation(oldRelation, pawn);
-                pawn.relations.AddDirectRelation(PawnRelationDefOfGR.Paramour, other);
-                other.relations.AddDirectRelation(PawnRelationDefOfGR.Paramour, pawn);
-                newRelation = PawnRelationDefOfGR.Paramour;
-            }
+            return (GRThoughtUtility.NumOfMemoriesOfDefWhereOtherPawnIs(pawn, other, ThoughtDefOfGR.SexualTension));
+            
         }
-        */
+
     }
 }

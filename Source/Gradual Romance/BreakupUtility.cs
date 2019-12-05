@@ -11,6 +11,19 @@ namespace Gradual_Romance
 {
     class BreakupUtility
     {
+        public static void TryDecayRelationship(Pawn pawn, Pawn other, PawnRelationDef relation)
+        {
+            DirectPawnRelation directPawnRelation = pawn.relations.GetDirectRelation(relation, other);
+            if (pawn.relations.GetDirectRelation(relation, other) == null)
+            {
+                return;
+            }
+            if (GRHelper.RomanticRelationExtension(relation).decayable)
+            {
+                
+            }
+
+        }
         //break all relations of given relation
         public static void BreakAllGivenRelations(Pawn pawn, PawnRelationDef relation, bool testRelations = false)
         {
@@ -78,56 +91,17 @@ namespace Gradual_Romance
         //converts relation to ex
         public static void RelationToEx (Pawn lover, Pawn ex, PawnRelationDef relation)
         {
-            if (relation == PawnRelationDefOf.Lover)
+            if (GRHelper.RomanticRelationExtension(relation).ex != null)
             {
-                lover.relations.TryRemoveDirectRelation(PawnRelationDefOf.Lover, ex);
-                lover.relations.AddDirectRelation(PawnRelationDefOf.ExLover, ex);
-                ex.relations.TryRemoveDirectRelation(PawnRelationDefOf.Lover, lover);
-                ex.relations.AddDirectRelation(PawnRelationDefOf.ExLover, lover);
-                return;
+                lover.relations.TryRemoveDirectRelation(relation, ex);
+                lover.relations.AddDirectRelation(GRHelper.RomanticRelationExtension(relation).ex, ex);
+
             }
-            if (relation == PawnRelationDefOf.Fiance)
+            else
             {
-                lover.relations.TryRemoveDirectRelation(PawnRelationDefOf.Fiance, ex);
-                lover.relations.AddDirectRelation(PawnRelationDefOf.ExLover, ex);
-                ex.relations.TryRemoveDirectRelation(PawnRelationDefOf.Fiance, lover);
-                ex.relations.AddDirectRelation(PawnRelationDefOf.ExLover, lover);
-                return;
+                lover.relations.TryRemoveDirectRelation(relation, ex);
             }
-            if (relation == PawnRelationDefOf.Spouse)
-            {
-                lover.relations.TryRemoveDirectRelation(PawnRelationDefOf.Spouse, ex);
-                lover.relations.AddDirectRelation(PawnRelationDefOf.ExSpouse, ex);
-                ex.relations.TryRemoveDirectRelation(PawnRelationDefOf.Spouse, lover);
-                ex.relations.AddDirectRelation(PawnRelationDefOf.ExSpouse, lover);
-                return;
-            }
-            if (relation == PawnRelationDefOfGR.Lovebuddy)
-            {
-                lover.relations.TryRemoveDirectRelation(PawnRelationDefOfGR.Lovebuddy, ex);
-                ex.relations.TryRemoveDirectRelation(PawnRelationDefOfGR.Lovebuddy, lover);
-                return;
-            }
-            if (relation == PawnRelationDefOfGR.Sweetheart)
-            {
-                lover.relations.TryRemoveDirectRelation(PawnRelationDefOfGR.Sweetheart, ex);
-                ex.relations.TryRemoveDirectRelation(PawnRelationDefOfGR.Sweetheart, lover);
-                return;
-            }
-            if (relation == PawnRelationDefOfGR.Paramour)
-            {
-                lover.relations.TryRemoveDirectRelation(PawnRelationDefOfGR.Paramour, ex);
-                ex.relations.TryRemoveDirectRelation(PawnRelationDefOfGR.Paramour, lover);
-                return;
-            }
-            if (relation == PawnRelationDefOfGR.Lovefriend)
-            {
-                lover.relations.TryRemoveDirectRelation(PawnRelationDefOfGR.Lovefriend, ex);
-                ex.relations.AddDirectRelation(PawnRelationDefOfGR.ExLovefriend, lover);
-                ex.relations.TryRemoveDirectRelation(PawnRelationDefOfGR.Lovefriend, lover);
-                lover.relations.AddDirectRelation(PawnRelationDefOfGR.ExLovefriend, ex);
-                return;
-            }
+            
 
         }
         public static void ResolveBreakup(Pawn lover, Pawn ex, PawnRelationDef relation, float intensity = 1f)
@@ -194,5 +168,6 @@ namespace Gradual_Romance
                 lover.needs.mood.thoughts.memories.TryGainMemory(brokeUpMoodDef, ex);
             }
         }
+
     }
 }

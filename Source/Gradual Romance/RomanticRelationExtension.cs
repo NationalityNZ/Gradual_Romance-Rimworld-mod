@@ -15,6 +15,7 @@ namespace Gradual_Romance
         public string newRelationshipLetterText;
         public string newRelationshipTitleText;
         public PawnRelationDef ex;
+        public bool decayable = false;
         public bool isFormalRelationship;
         public bool needsDivorce = false;
         public bool goesOnDates;
