@@ -9,29 +9,71 @@ using UnityEngine;
 
 namespace Gradual_Romance
 {
-    class BreakupUtility
+    public static class BreakupUtility
     {
-        public static void TryDecayRelationship(Pawn pawn, Pawn other, PawnRelationDef relation)
+        public static bool HasReasonForBreakup(Pawn pawn, Pawn other)
+        {
+            PawnRelationDef relation = RelationshipUtility.MostAdvancedRelationshipBetween(pawn, other);
+            if (relation == null)
+            {
+                return false;
+            }
+            if (AttractionUtility.GetRelationshipUnmodifiedOpinion(pawn,other) < unmodifiedRelationshipBreakupThreshold)
+            {
+                return true;
+            }
+            if (pawn.needs.mood.thoughts.memories.Memories.Any<Thought_Memory>(x => x.def.defName == "CheatedOnMe" && x.otherPawn == other))
+            {
+                return true;
+            }
+            if (pawn.needs.mood.thoughts.memories.Memories.Any<Thought_Memory>(x => x.def.defName == "CaughtFlirting" && x.otherPawn == other))
+            {
+                return true;
+            }
+            if (ThoughtDetector.HasSocialSituationalThought(pawn, other, ThoughtDefOfGR.FeelingNeglected))
+            {
+                return true;
+            }
+            return false;
+
+        }
+        public static bool CanDecay(Pawn pawn, Pawn other, PawnRelationDef relation)
         {
             DirectPawnRelation directPawnRelation = pawn.relations.GetDirectRelation(relation, other);
-            if (pawn.relations.GetDirectRelation(relation, other) == null)
+            if (directPawnRelation == null)
             {
-                return;
+                //GradualRomanceMod.Error_TriedDecayNullRelationship(pawn, other, relation);
+                return false;
             }
-            if (GRHelper.RomanticRelationExtension(relation).decayable)
+            if (!GRHelper.RomanticRelationExtension(relation).decayable)
             {
-                
+                return false;
             }
+            //TODO - Revise to reflect lovin'
+            if (RelationshipUtility.LevelOfTension(pawn, other) <= 0)
+            {
+                return true;
+            }
+            return false;
+        }
 
+        public static void DecayRelationship(Pawn pawn, Pawn other, PawnRelationDef relation)
+        {
+            pawn.relations.TryRemoveDirectRelation(relation, other);
+            if ((PawnUtility.ShouldSendNotificationAbout(pawn) || PawnUtility.ShouldSendNotificationAbout(other)) && GradualRomanceMod.informalRomanceLetters)
+            {
+                //Finish
+                Current.Game.letterStack.ReceiveLetter("RelationshipDecays_label", "RelationshipDecays_text".Translate(pawn, other, relation.label), LetterDefOf.NeutralEvent);
+            }
         }
         //break all relations of given relation
         public static void BreakAllGivenRelations(Pawn pawn, PawnRelationDef relation, bool testRelations = false)
         {
-            if (!GRPawnRelationUtility.IsRomanticOrSexualRelationship(relation))
+            if (!RelationshipUtility.IsRomanticOrSexualRelationship(relation))
             {
                 return;
             }
-            List<Pawn> allPawns = GRPawnRelationUtility.GetAllPawnsWithGivenRelationshipTo(pawn, relation);
+            List<Pawn> allPawns = RelationshipUtility.GetAllPawnsWithGivenRelationshipTo(pawn, relation);
             for (int i = 0; i < allPawns.Count(); i++)
             {
                 RelationToEx(pawn, allPawns[i], relation);
@@ -45,7 +87,7 @@ namespace Gradual_Romance
                 {
                     return;
                 }
-                if (GRPawnRelationUtility.IsPolygamist(pawn))
+                if (RelationshipUtility.IsPolygamist(pawn))
                 {
                     pawn.needs.mood.thoughts.memories.TryGainMemory(ThoughtDefOfGR.CheatedOnMePolygamist, cheater);
                 }
@@ -83,7 +125,7 @@ namespace Gradual_Romance
                         }
                     }
                     pawn.needs.mood.thoughts.memories.TryGainMemory(ThoughtDefOfGR.LoversLover, cheaterLover);
-                    cheaterLover.needs.mood.thoughts.memories.TryGainMemory(ThoughtDefOfGR.LoversLover, pawn);
+                    //cheaterLover.needs.mood.thoughts.memories.TryGainMemory(ThoughtDefOfGR.LoversLover, pawn);
                 }
             }
         }
@@ -101,8 +143,6 @@ namespace Gradual_Romance
             {
                 lover.relations.TryRemoveDirectRelation(relation, ex);
             }
-            
-
         }
         public static void ResolveBreakup(Pawn lover, Pawn ex, PawnRelationDef relation, float intensity = 1f)
         {
@@ -168,6 +208,54 @@ namespace Gradual_Romance
                 lover.needs.mood.thoughts.memories.TryGainMemory(brokeUpMoodDef, ex);
             }
         }
+        public static bool ShouldBeJealous(Pawn observer, Pawn initiator, Pawn recipient)
+        {
+            if (RelationshipUtility.IsPolygamist(observer))
+            {
+                return false;
+            }
+            PawnRelationDef initiatorRelationship = RelationshipUtility.MostAdvancedRelationshipBetween(observer, initiator);
+            PawnRelationDef recipientRelationship = RelationshipUtility.MostAdvancedRelationshipBetween(observer, recipient);
+            if (initiatorRelationship == null)
+            {
+                return false;
+            }
+            if (!initiatorRelationship.GetModExtension<RomanticRelationExtension>().caresAboutCheating)
+            {
+                return false;
+            }
+            if (recipientRelationship != null && !observer.story.traits.HasTrait(TraitDefOfGR.Jealous))
+            {
+                return false;
+            }
+            return true;
+        }
 
+        public static bool ShouldImplicitlyEndInformalRelationship(Pawn pawn, Pawn other, PawnRelationDef relation)
+        {
+            if (CanDecay(pawn, other, relation))
+            {
+                return true;
+            }
+            if (RelationshipUtility.IsPolygamist(pawn))
+            {
+                return false;
+            }
+
+            float chance = Mathf.InverseLerp(80, -20, AttractionUtility.GetRelationshipUnmodifiedOpinion(pawn, other));
+            chance *= (relation.GetModExtension<RomanticRelationExtension>().relationshipLevel / (relation.GetModExtension<RomanticRelationExtension>().relationshipLevel + 1));
+            if (PsycheHelper.PsychologyEnabled(pawn))
+            {
+                chance *= Mathf.Lerp(0f, 2f, PsycheHelper.Comp(pawn).Psyche.GetPersonalityRating(PersonalityNodeDefOfGR.Moralistic));
+            }
+            if (Rand.Value < chance)
+            {
+                return true;
+            }
+            return false;
+
+        }
+
+        const int unmodifiedRelationshipBreakupThreshold = 10;
     }
 }

@@ -22,6 +22,7 @@ namespace Gradual_Romance
         public bool sharesBed;
         public bool doesLovin;
         public bool caresAboutCheating;
+        public float breakupIntensity;
         public List<ThoughtCondition> conditions = new List<ThoughtCondition>() { };
         public int relationshipLevel;
     }

@@ -49,6 +49,7 @@
         <sharesBed>false</sharesBed>
         <doesLovin>false</doesLovin>
         <caresAboutCheating>false</caresAboutCheating>
+        <breakupIntensity>0.5</breakupIntensity>
         <conditions>
           <li>
             <thought>RomanticTension</thought>
@@ -79,6 +80,7 @@
           <sharesBed>false</sharesBed>
           <doesLovin>true</doesLovin>
           <caresAboutCheating>false</caresAboutCheating>
+          <breakupIntensity>0.1</breakupIntensity>
           <conditions>
             <li>
               <thought>SexualTension</thought>
@@ -90,19 +92,85 @@
   </PawnRelationDef>
 
   <PawnRelationDef>
+    <!--<workerClass>Gradual_Romance.PawnRelationWorker_LoveBuddy</workerClass>-->
+    <defName>Steady</defName>
+    <label>steady</label>
+    <importance>187</importance>
+    <opinionOffset>5</opinionOffset>
+    <implied>false</implied>
+    <reflexive>true</reflexive>
+    <modExtensions>
+      <li Class ="Gradual_Romance.RomanticRelationExtension">
+        <newRelationshipLetterText>NewSteadyText</newRelationshipLetterText>
+        <newRelationshipTitleText>NewSteadyLabel</newRelationshipTitleText>
+        <relationshipLevel>1</relationshipLevel>
+        <baseAffairReluctance>1</baseAffairReluctance>
+        <decayable>true</decayable>
+        <isFormalRelationship>false</isFormalRelationship>
+        <goesOnDates>true</goesOnDates>
+        <sharesBed>false</sharesBed>
+        <doesLovin>false</doesLovin>
+        <caresAboutCheating>false</caresAboutCheating>
+        <breakupIntensity>0.25</breakupIntensity>
+        <conditions>
+          <li>
+            <thought>LogicalTension</thought>
+            <numberRequired>2</numberRequired>
+          </li>
+        </conditions>
+      </li>
+    </modExtensions>
+  </PawnRelationDef>
+
+  <PawnRelationDef>
+    <!--<workerClass>Gradual_Romance.PawnRelationWorker_LoveFriend</workerClass>-->
+    <defName>Suitor</defName>
+    <label>suitor</label>
+    <importance>192</importance>
+    <diedThought>MyLoverDied</diedThought>
+    <killedThought>KilledMyLover</killedThought>
+    <soldThought>SoldMyLovedOne</soldThought>
+    <opinionOffset>12</opinionOffset>
+    <implied>false</implied>
+    <reflexive>true</reflexive>
+    <modExtensions>
+      <li Class ="Gradual_Romance.RomanticRelationExtension">
+        <newRelationshipLetterText>NewSuitorText</newRelationshipLetterText>
+        <newRelationshipTitleText>NewSuitorLabel</newRelationshipTitleText>
+        <relationshipLevel>2</relationshipLevel>
+        <baseAffairReluctance>0.75</baseAffairReluctance>
+        <decayable>true</decayable>
+        <isFormalRelationship>false</isFormalRelationship>
+        <goesOnDates>true</goesOnDates>
+        <sharesBed>false</sharesBed>
+        <doesLovin>true</doesLovin>
+        <caresAboutCheating>false</caresAboutCheating>
+        <breakupIntensity>0.5</breakupIntensity>
+        <conditions>
+          <li>
+            <thought>LogicalTension</thought>
+            <numberRequired>4</numberRequired>
+          </li>
+        </conditions>
+      </li>
+    </modExtensions>
+  </PawnRelationDef>
+
+  <PawnRelationDef>
     <!--<workerClass>Gradual_Romance.PawnRelationWorker_LoveFriend</workerClass>-->
     <defName>Paramour</defName>
-    <label>swain</label>
-    <labelFemale>leman</labelFemale>
-    <importance>192</importance>
+    <label>paramour</label>
+    <importance>194</importance>
     <diedThought>MyLoverDied</diedThought>
     <killedThought>KilledMyLover</killedThought>
     <soldThought>SoldMyLovedOne</soldThought>
     <opinionOffset>20</opinionOffset>
     <implied>false</implied>
     <reflexive>true</reflexive>
+
     <modExtensions>
       <li Class ="Gradual_Romance.RomanticRelationExtension">
+        <breakupIntensity>0.9</breakupIntensity>
         <newRelationshipLetterText>NewParamoursText</newRelationshipLetterText>
         <newRelationshipTitleText>NewParamoursLabel</newRelationshipTitleText>
         <relationshipLevel>2</relationshipLevel>
@@ -121,6 +189,76 @@
           <li>
             <thought>RomanticTension</thought>
             <numberRequired>2</numberRequired>
+          </li>
+        </conditions>
+      </li>
+    </modExtensions>
+  </PawnRelationDef>
+
+  <PawnRelationDef>
+    <!--<workerClass>Gradual_Romance.PawnRelationWorker_LoveFriend</workerClass>-->
+    <defName>Flame</defName>
+    <label>flame</label>
+    <importance>191</importance>
+    <diedThought>MyLoverDied</diedThought>
+    <killedThought>KilledMyLover</killedThought>
+    <soldThought>SoldMyLovedOne</soldThought>
+    <opinionOffset>15</opinionOffset>
+    <implied>false</implied>
+    <reflexive>true</reflexive>
+
+    <modExtensions>
+      <li Class ="Gradual_Romance.RomanticRelationExtension">
+        <breakupIntensity>0.35</breakupIntensity>
+        <newRelationshipLetterText>NewFlameText</newRelationshipLetterText>
+        <newRelationshipTitleText>NewFlameLabel</newRelationshipTitleText>
+        <relationshipLevel>2</relationshipLevel>
+        <baseAffairReluctance>0.95</baseAffairReluctance>
+        <decayable>true</decayable>
+        <isFormalRelationship>false</isFormalRelationship>
+        <goesOnDates>false</goesOnDates>
+        <sharesBed>false</sharesBed>
+        <doesLovin>true</doesLovin>
+        <caresAboutCheating>false</caresAboutCheating>
+        <conditions>
+          <li>
+            <thought>SexualTension</thought>
+            <numberRequired>4</numberRequired>
+          </li>
+        </conditions>
+      </li>
+    </modExtensions>
+  </PawnRelationDef>
+
+  <PawnRelationDef>
+    <!--<workerClass>Gradual_Romance.PawnRelationWorker_LoveFriend</workerClass>-->
+    <defName>Darling</defName>
+    <label>darling</label>
+    <importance>193</importance>
+    <diedThought>MyLoverDied</diedThought>
+    <killedThought>KilledMyLover</killedThought>
+    <soldThought>SoldMyLovedOne</soldThought>
+    <opinionOffset>20</opinionOffset>
+    <implied>false</implied>
+    <reflexive>true</reflexive>
+
+    <modExtensions>
+      <li Class ="Gradual_Romance.RomanticRelationExtension">
+        <breakupIntensity>0.75</breakupIntensity>
+        <newRelationshipLetterText>NewDarlingText</newRelationshipLetterText>
+        <newRelationshipTitleText>NewDarlingLabel</newRelationshipTitleText>
+        <relationshipLevel>2</relationshipLevel>
+        <baseAffairReluctance>0.06</baseAffairReluctance>
+        <decayable>true</decayable>
+        <isFormalRelationship>false</isFormalRelationship>
+        <goesOnDates>true</goesOnDates>
+        <sharesBed>false</sharesBed>
+        <doesLovin>false</doesLovin>
+        <caresAboutCheating>false</caresAboutCheating>
+        <conditions>
+          <li>
+            <thought>RomanticTension</thought>
+            <numberRequired>4</numberRequired>
           </li>
         </conditions>
       </li>
@@ -148,6 +286,7 @@
         <goesOnDates>true</goesOnDates>
         <sharesBed>false</sharesBed>
         <doesLovin>true</doesLovin>
+        <breakupIntensity>1</breakupIntensity>
         <caresAboutCheating>true</caresAboutCheating>
       </li>
     </modExtensions>

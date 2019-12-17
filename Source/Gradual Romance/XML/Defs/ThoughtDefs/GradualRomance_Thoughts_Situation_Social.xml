@@ -1,8 +1,69 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
+  <ThoughtDef>
+    <defName>Homophobic</defName>
+    <thoughtClass>Thought_SituationalSocial</thoughtClass>
+    <workerClass>Gradual_Romance.ThoughtWorker_Homophobic</workerClass>
+    <requiredTraits>
+      <li>Homophobic</li>
+    </requiredTraits>
+    <validWhileDespawned>true</validWhileDespawned>
+    <stages>
+      <li>
+        <label>homosexual</label>
+        <baseOpinionOffset>-20</baseOpinionOffset>
+      </li>
+    </stages>
+  </ThoughtDef>
 
+  <ThoughtDef>
+    <defName>DisfiguredSuperficial</defName>
+    <thoughtClass>Thought_SituationalSocial</thoughtClass>
+    <workerClass>ThoughtWorker_Disfigured</workerClass>
+    <requiredTraits>
+      <li>Superficial</li>
+    </requiredTraits>
+    <validWhileDespawned>true</validWhileDespawned>
+    <stages>
+      <li>
+        <label>disfigured</label>
+        <baseOpinionOffset>-20</baseOpinionOffset>
+      </li>
+    </stages>
+  </ThoughtDef>
 
+  <ThoughtDef>
+    <defName>AnnoyingVoiceSuperficial</defName>
+    <thoughtClass>Thought_SituationalSocial</thoughtClass>
+    <workerClass>ThoughtWorker_AnnoyingVoice</workerClass>
+    <requiredTraits>
+      <li>Superficial</li>
+    </requiredTraits>
+    <validWhileDespawned>true</validWhileDespawned>
+    <stages>
+      <li>
+        <label>annoying voice</label>
+        <baseOpinionOffset>-20</baseOpinionOffset>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>CreepyBreathingSuperficial</defName>
+    <thoughtClass>Thought_SituationalSocial</thoughtClass>
+    <workerClass>ThoughtWorker_CreepyBreathing</workerClass>
+    <requiredTraits>
+      <li>Superficial</li>
+    </requiredTraits>
+    <validWhileDespawned>true</validWhileDespawned>
+    <stages>
+      <li>
+        <label>creepy breathing</label>
+        <baseOpinionOffset>-20</baseOpinionOffset>
+      </li>
+    </stages>
+  </ThoughtDef>
   
   <ThoughtDef>
     <defName>PrettySuperficial</defName>
@@ -32,7 +93,7 @@
     </stages>
   </ThoughtDef>
   
-    <ThoughtDef>
+  <ThoughtDef>
     <defName>UglySuperficial</defName>
     <thoughtClass>Thought_SituationalSocial</thoughtClass>
     <workerClass>Gradual_Romance.ThoughtWorker_UglySuperficial</workerClass>
@@ -61,18 +122,23 @@
   </ThoughtDef>
  
 	<ThoughtDef>
-    <defName>ColdFeetSharingBed</defName>
-    <workerClass>Gradual_Romance.ThoughtWorker_ColdFeetSharingBed</workerClass>
+    <defName>FeelingNeglected</defName>
+    <thoughtClass>Thought_SituationalSocial</thoughtClass>
+    <workerClass>Gradual_Romance.ThoughtWorker_FeelingNeglected</workerClass>
         <validWhileDespawned>false</validWhileDespawned>
+    <nullifyingTraits>
+      <li>Aromantic</li>
+    </nullifyingTraits>
     <stages>
-	  <li>
-        <label>cold feet from sharing bed</label>
-        <description>Things are moving WAY too fast! This relationship isn't strong enough to share a bed.</description>
-		<baseMoodEffect>-3</baseMoodEffect>
-
+	    <li>
+        <label>feeling neglected</label>
+        <description>My lover pays no attention to me.</description>
+        <baseOpinionOffset>-5</baseOpinionOffset>
       </li>
     </stages>
   </ThoughtDef>
+
+
     
 
   <!-- affecting opinion 

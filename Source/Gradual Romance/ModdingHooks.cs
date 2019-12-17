@@ -15,14 +15,19 @@ namespace Gradual_Romance
             return (LoadedModManager.RunningModsListForReading.Any(x => x.Name == "The Birds and the Bees"));
         }
 
-
         //HUMANOID ALIEN RACES
         public static bool UsingHumanoidAlienFramework()
         {
             return (LoadedModManager.RunningModsListForReading.Any(x => x.Name == "Humanoid Alien Races 2.0"));
         }
-
-
+        public static bool IsXenophile(Pawn pawn)
+        {
+            return (pawn.story.traits.allTraits.Any(x => x.def.defName == "Xenophobia" && x.Degree > 0));
+        }
+        public static bool IsXenophobe(Pawn pawn)
+        {
+            return (pawn.story.traits.allTraits.Any(x => x.def.defName == "Xenophobia" && x.Degree < 0));
+        }
 
         //DUBS BAD HYGIENE       
         public static bool UsingDubsHygiene()

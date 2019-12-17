@@ -2,7 +2,7 @@
 
 <Defs>
 
-<StatDef>
+<!--<StatDef>
   <defName>FacialAttractiveness</defName>
   <label>facial attractiveness</label>
   <description>Though attractiveness is subjective, symmetrical faces and unblemished, healthy skin is considered by most people more attractive. Despite what people think, beauty is not everything, and ugly people can get on just fine, though they might have a hard time finding mates.</description>
@@ -15,6 +15,6 @@
   <neverDisabled>true</neverDisabled>
   <showOnAnimals>false</showOnAnimals>
   <showOnMechanoids>false</showOnMechanoids>
-</StatDef>
+</StatDef>-->
 
 </Defs>

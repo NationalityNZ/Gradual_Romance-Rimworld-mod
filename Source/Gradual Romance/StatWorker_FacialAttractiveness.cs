@@ -7,6 +7,7 @@ using Verse;
 
 namespace Gradual_Romance
 {
+/*   
     public class StatWorker_FacialAttractiveness : StatWorker
     {
         public override float GetValueUnfinalized(StatRequest req, bool applyPostProcess = true)
@@ -31,4 +32,5 @@ namespace Gradual_Romance
             return stringBuilder;
         }
     }
+    */
 }

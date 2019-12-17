@@ -1,14 +1,217 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
-<!--
 
-INTERACTION PATCHES
-
--->
 
 
 <Patch>
-	<Operation Class="PatchOperationReplace">
+
+  <!--
+
+THOUGHT PATCHES
+
+  -->
+
+  <Operation Class="PatchOperationReplace">
+    <success>Normal</success>
+    <xpath>/Defs/ThoughtDef[defName="Pretty"]/stages</xpath>
+    <value>
+      <stages>
+        <li>
+          <label>attractive</label>
+          <baseOpinionOffset>3</baseOpinionOffset>
+        </li>
+        <li>
+          <label>comely</label>
+          <baseOpinionOffset>6</baseOpinionOffset>
+        </li>
+        <li>
+          <label>beautiful</label>
+          <baseOpinionOffset>12</baseOpinionOffset>
+        </li>
+        <li>
+          <label>ethereal beauty</label>
+          <baseOpinionOffset>24</baseOpinionOffset>
+        </li>
+      </stages>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <success>Normal</success>
+    <xpath>/Defs/ThoughtDef[defName="Ugly"]/stages</xpath>
+    <value>
+      <stages>
+        <li>
+          <label>unattractive</label>
+          <baseOpinionOffset>-3</baseOpinionOffset>
+        </li>
+        <li>
+          <label>homely</label>
+          <baseOpinionOffset>-6</baseOpinionOffset>
+        </li>
+        <li>
+          <label>ugly</label>
+          <baseOpinionOffset>-12</baseOpinionOffset>
+        </li>
+        <li>
+          <label>staggeringly ugly</label>
+          <baseOpinionOffset>-24</baseOpinionOffset>
+        </li>
+      </stages>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <success>Normal</success>
+    <xpath>/Defs/ThoughtDef[defName="Disfigured"]/stages</xpath>
+    <value>
+      <stages>
+        <li>
+          <label>disfigured</label>
+          <baseOpinionOffset>-3</baseOpinionOffset>
+        </li>
+      </stages>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThoughtDef[defName="Disfigured"]/nullifyingTraits</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>/Defs/ThoughtDef[defName="Disfigured"]</xpath>
+      <value>
+        <nullifyingTraits>
+          <li>Superficial</li>
+        </nullifyingTraits>
+      </value>
+    </nomatch>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/ThoughtDef[defName="Disfigured"]/nullifyingTraits</xpath>
+      <value>
+        <li>Superficial</li>
+      </value>
+    </match>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <success>Normal</success>
+    <xpath>/Defs/ThoughtDef[defName="AnnoyingVoice"]/stages</xpath>
+    <value>
+      <stages>
+        <li>
+          <label>annoying voice</label>
+          <baseOpinionOffset>-5</baseOpinionOffset>
+        </li>
+      </stages>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThoughtDef[defName="AnnoyingVoice"]/nullifyingTraits</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>/Defs/ThoughtDef[defName="AnnoyingVoice"]</xpath>
+      <value>
+        <nullifyingTraits>
+          <li>Superficial</li>
+        </nullifyingTraits>
+      </value>
+    </nomatch>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/ThoughtDef[defName="AnnoyingVoice"]/nullifyingTraits</xpath>
+      <value>
+        <li>Superficial</li>
+      </value>
+    </match>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <success>Normal</success>
+    <xpath>/Defs/ThoughtDef[defName="CreepyBreathing"]/stages</xpath>
+    <value>
+      <stages>
+        <li>
+          <label>creepy breathing</label>
+          <baseOpinionOffset>-5</baseOpinionOffset>
+        </li>
+      </stages>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThoughtDef[defName="CreepyBreathing"]/nullifyingTraits</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>/Defs/ThoughtDef[defName="CreepyBreathing"]</xpath>
+      <value>
+        <nullifyingTraits>
+          <li>Superficial</li>
+        </nullifyingTraits>
+      </value>
+    </nomatch>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/ThoughtDef[defName="CreepyBreathing"]/nullifyingTraits</xpath>
+      <value>
+        <li>Superficial</li>
+      </value>
+    </match>
+  </Operation>
+
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThoughtDef[defName="Pretty"]/nullifyingTraits</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>/Defs/ThoughtDef[defName="Pretty"]</xpath>
+      <value>
+        <nullifyingTraits>
+          <li>Superficial</li>
+        </nullifyingTraits>
+      </value>
+    </nomatch>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/ThoughtDef[defName="Pretty"]/nullifyingTraits</xpath>
+      <value>
+        <li>Superficial</li>
+      </value>
+    </match>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>/Defs/ThoughtDef[defName="Ugly"]/nullifyingTraits</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>/Defs/ThoughtDef[defName="Ugly"]</xpath>
+      <value>
+        <nullifyingTraits>
+          <li>Superficial</li>
+        </nullifyingTraits>
+      </value>
+    </nomatch>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/ThoughtDef[defName="Ugly"]/nullifyingTraits</xpath>
+      <value>
+        <li>Superficial</li>
+      </value>
+    </match>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <success>Normal</success>
+    <xpath>/Defs/ThoughtDef[defName="WantToSleepWithSpouseOrLover"]/thoughtClass</xpath>
+    <value>
+      <thoughtClass>Gradual_Romance.Thought_GRWantToSleepWithSpouseOrLover</thoughtClass>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <success>Normal</success>
+    <xpath>/Defs/ThoughtDef[defName="WantToSleepWithSpouseOrLover"]/workerClass</xpath>
+    <value>
+      <workerClass>Gradual_Romance.ThoughtWorker_GRWantToSleepWithSpouseOrLover</workerClass>
+    </value>
+  </Operation>
+
+
+  
+  <!--
+
+INTERACTION PATCHES
+
+  -->
+
+
+  <Operation Class="PatchOperationReplace">
 		<success>Normal</success>
 			<xpath>/Defs/InteractionDef[defName="RomanceAttempt"]/workerClass</xpath>
 			<value>
@@ -26,21 +229,11 @@ INTERACTION PATCHES
 
   </Operation>
 
-  <Operation Class="PatchOperationReplace">
-    <success>Normal</success>
-    <xpath>/Defs/ThoughtDef[defName="WantToSleepWithSpouseOrLover"]/thoughtClass</xpath>
-    <value>
-  <thoughtClass>Gradual_Romance.Thought_GRWantToSleepWithSpouseOrLover</thoughtClass>
-      </value>
-  </Operation>
+  <!--
 
-    <Operation Class="PatchOperationReplace">
-      <success>Normal</success>
-      <xpath>/Defs/ThoughtDef[defName="WantToSleepWithSpouseOrLover"]/workerClass</xpath>
-      <value>
-        <workerClass>Gradual_Romance.ThoughtWorker_GRWantToSleepWithSpouseOrLover</workerClass>
-      </value>
-  </Operation>
+TRAIT PATCHES
+
+  -->
 
  
   <Operation Class="PatchOperationReplace">
@@ -100,101 +293,23 @@ INTERACTION PATCHES
     </value>
   </Operation>
 
-  <Operation Class="PatchOperationReplace">
-    <success>Normal</success>
-    <xpath>/Defs/ThoughtDef[defName="Pretty"]/stages</xpath>
-    <value>
-      <stages>
-        <li>
-          <label>attractive</label>
-          <baseOpinionOffset>3</baseOpinionOffset>
-        </li>
-        <li>
-          <label>comely</label>
-          <baseOpinionOffset>6</baseOpinionOffset>
-        </li>
-        <li>
-          <label>beautiful</label>
-          <baseOpinionOffset>12</baseOpinionOffset>
-        </li>
-        <li>
-          <label>ethereal beauty</label>
-          <baseOpinionOffset>24</baseOpinionOffset>
-        </li>
-      </stages>
-    </value>
-  </Operation>
+  <!--
 
-  <Operation Class="PatchOperationReplace">
-    <success>Normal</success>
-    <xpath>/Defs/ThoughtDef[defName="Ugly"]/stages</xpath>
-    <value>
-      <stages>
-        <li>
-          <label>unattractive</label>
-          <baseOpinionOffset>-3</baseOpinionOffset>
-        </li>
-        <li>
-          <label>homely</label>
-          <baseOpinionOffset>-6</baseOpinionOffset>
-        </li>
-        <li>
-          <label>ugly</label>
-          <baseOpinionOffset>-12</baseOpinionOffset>
-        </li>
-        <li>
-          <label>staggeringly ugly</label>
-          <baseOpinionOffset>-24</baseOpinionOffset>
-        </li>
-      </stages>
-    </value>
-  </Operation>
+THINGDEF PATCHES
 
-  <Operation Class="PatchOperationConditional">
-    <xpath>/Defs/ThoughtDef[defName="Pretty"]/nullifyingTraits</xpath>
-    <nomatch Class="PatchOperationAdd">
-      <xpath>/Defs/ThoughtDef[defName="Pretty"]</xpath>
-      <value>
-        <nullifyingTraits>
-          <li>Superficial</li>
-        </nullifyingTraits>
-      </value>
-    </nomatch>
-    <match Class="PatchOperationAdd">
-      <xpath>/Defs/ThoughtDef[defName="Pretty"]/nullifyingTraits</xpath>
-      <value>
-        <li>Superficial</li>
-      </value>
-    </match>
-  </Operation>
-  <Operation Class="PatchOperationConditional">
-    <xpath>/Defs/ThoughtDef[defName="Ugly"]/nullifyingTraits</xpath>
-    <nomatch Class="PatchOperationAdd">
-      <xpath>/Defs/ThoughtDef[defName="Ugly"]</xpath>
-      <value>
-        <nullifyingTraits>
-          <li>Superficial</li>
-        </nullifyingTraits>
-      </value>
-    </nomatch>
-    <match Class="PatchOperationAdd">
-      <xpath>/Defs/ThoughtDef[defName="Ugly"]/nullifyingTraits</xpath>
-      <value>
-        <li>Superficial</li>
-      </value>
-    </match>
-  </Operation>
-
+  -->
 
 
   <Operation Class="PatchOperationAddModExtension">
       <xpath>Defs/ThingDef[defName="Human"]</xpath>
       <value>
         <li Class="Gradual_Romance.XenoRomanceExtension">
+          <!--
           <youngAdultAge>18</youngAdultAge>
           <midlifeAge>40</midlifeAge>
           <minimumAgeDeviation>1</minimumAgeDeviation>
           <maximumAgeDeviation>10</maximumAgeDeviation>
+          -->
           <!--
           Extraspecies appeal shouldn't be above 1 or below 0.
           At 0, the species is repulsive. They will never have relationships outside their own species.
@@ -248,7 +363,7 @@ INTERACTION PATCHES
               <y>0.1</y>
             </li>
           </sexDriveByAgeCurveFemale>
-          <attractivenessByAgeCurveMale>
+<!--          <attractivenessByAgeCurveMale>
             <li>
               <x>18</x>
               <y>0</y>
@@ -291,14 +406,105 @@ INTERACTION PATCHES
               <x>90</x>
               <y>0.1</y>
             </li>
-          </attractivenessByAgeCurveFemale>
+          </attractivenessByAgeCurveFemale>-->
+          <!--
+          0.1 = infant
+          0.2 = toddler
+          0.3 = child
+          0.5 = start puberty
+          1.0 = reproductive age
+          2.0 = end of reproductive age
+          3.0 = end of expected life expectancy
+          -->
+          <maturityByAgeCurveMale>
+            <li>
+              <x>0</x>
+              <y>0.01</y>
+            </li>
+            <li>
+              <x>1</x>
+              <y>0.1</y>
+            </li>
+            <li>
+              <x>2</x>
+              <y>0.2</y>
+            </li>
+            <li>
+              <x>3</x>
+              <y>0.3</y>
+            </li>
+            <li>
+              <x>6</x>
+              <y>0.4</y>
+            </li>
+            <li>
+              <x>12</x>
+              <y>0.5</y>
+            </li>
+            <li>
+              <x>18</x>
+              <y>1</y>
+            </li>
+            <li>
+              <x>55</x>
+              <y>2</y>
+            </li>
+            <li>
+              <x>80</x>
+              <y>3</y>
+            </li>
+          </maturityByAgeCurveMale>
+          <maturityByAgeCurveFemale>
+            <li>
+              <x>0</x>
+              <y>0.01</y>
+            </li>
+            <li>
+              <x>1</x>
+              <y>0.1</y>
+            </li>
+            <li>
+              <x>2</x>
+              <y>0.2</y>
+            </li>
+            <li>
+              <x>3</x>
+              <y>0.3</y>
+            </li>
+            <li>
+              <x>6</x>
+              <y>0.4</y>
+            </li>
+            <li>
+              <x>12</x>
+              <y>0.5</y>
+            </li>
+            <li>
+              <x>18</x>
+              <y>1</y>
+            </li>
+            <li>
+              <x>55</x>
+              <y>2</y>
+            </li>
+            <li>
+              <x>80</x>
+              <y>3</y>
+            </li>
+          </maturityByAgeCurveFemale>
           <faceCategory>Human</faceCategory>
           <bodyCategory>Human</bodyCategory>
           <mindCategory>Human</mindCategory>
         </li>
       </value>
     </Operation>
+
+  <!--
   
+  BODYTYPE PATCHES
+    
+    -->
+
   <Operation Class="PatchOperationAddModExtension">
       <xpath>Defs/BodyTypeDef[defName="Fat"]</xpath>
       <value>
@@ -329,9 +535,8 @@ INTERACTION PATCHES
     </Operation>
 
   <!--
-        public string newRelationshipLetterText;
-        public string newRelationshipTitleText;
-        public PawnRelationDef ex;
+  
+  RELATIONSHIP PATCHES
     
     -->
   
@@ -347,6 +552,7 @@ INTERACTION PATCHES
         <sharesBed>true</sharesBed>
         <doesLovin>true</doesLovin>
         <caresAboutCheating>true</caresAboutCheating>
+        <breakupIntensity>1.5</breakupIntensity>
         <ex>ExLover</ex>
       </li>
     </value>
@@ -362,6 +568,7 @@ INTERACTION PATCHES
         <sharesBed>true</sharesBed>
         <doesLovin>true</doesLovin>
         <caresAboutCheating>true</caresAboutCheating>
+        <breakupIntensity>1.5</breakupIntensity>
         <ex>ExLover</ex>
       </li>
     </value>
@@ -378,75 +585,12 @@ INTERACTION PATCHES
         <doesLovin>true</doesLovin>
         <caresAboutCheating>true</caresAboutCheating>
         <needsDivorce>true</needsDivorce>
+        <breakupIntensity>2</breakupIntensity>
         <ex>ExSpouse</ex>
       </li>
     </value>
   </Operation>
   
-  
-  <!-- MOD EXTENSIONS -->
 
-  <!--
-
-      <modExtensions>
-      <Gradual_Romance.RomanticRelationExtension>
-        <relationshipLevel>2</relationshipLevel>
-        <baseAffairReluctance>0.5</baseAffairReluctance>
-        <isFormalRelationship>false</isFormalRelationship>
-        <goesOnDates>true</goesOnDates>
-        <sharesBed>false</sharesBed>
-        <doesLovin>true</doesLovin>
-        <caresAboutCheating>false</caresAboutCheating>
-        <conditions>
-          <li>
-            <thought>SexualTension</thought>
-            <numberRequired>3</numberRequired>
-          </li>
-          <li>
-            <thought>RomanticTension</thought>
-            <numberRequired>3</numberRequired>
-          </li>
-        </conditions>
-      </Gradual_Romance.RomanticRelationExtension>
-    </modExtensions>
-  
-  <ThoughtDef>
-    <defName>Pretty</defName>
-    <thoughtClass>Thought_SituationalSocial</thoughtClass>
-    <workerClass>ThoughtWorker_Pretty</workerClass>
-    <validWhileDespawned>true</validWhileDespawned>
-    <stages>
-      <li>
-        <label>pretty</label>
-        <baseOpinionOffset>20</baseOpinionOffset>
-      </li>
-      <li>
-        <label>beautiful</label>
-        <baseOpinionOffset>40</baseOpinionOffset>
-      </li>
-    </stages>
-  </ThoughtDef>
-
-  <ThoughtDef>
-    <defName>Ugly</defName>
-    <thoughtClass>Thought_SituationalSocial</thoughtClass>
-    <workerClass>ThoughtWorker_Ugly</workerClass>
-    <validWhileDespawned>true</validWhileDespawned>
-    <stages>
-      <li>
-        <label>ugly</label>
-        <baseOpinionOffset>-20</baseOpinionOffset>
-      </li>
-      <li>
-        <label>staggeringly ugly</label>
-        <baseOpinionOffset>-40</baseOpinionOffset>
-      </li>
-    </stages>
-  </ThoughtDef>
-
-
-
-
--->
 	
 </Patch>

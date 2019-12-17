@@ -18,5 +18,7 @@ namespace Gradual_Romance
         public static TraitDef Immunity;
 
         public static TraitDef MelodicVoice;
+
+        public static TraitDef Jealous;
     }
 }

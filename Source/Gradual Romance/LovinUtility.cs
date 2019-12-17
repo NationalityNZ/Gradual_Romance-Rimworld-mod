@@ -10,6 +10,26 @@ namespace Gradual_Romance
     static class LovinUtility
     {
 
+
+        public static bool IsCellPrivateFor(IntVec3 cell, Pawn pawn, Pawn other)
+        {
+            IEnumerable<Pawn> disturbingPawns = pawn.Map.mapPawns.AllPawnsSpawned.Where<Pawn>(x => x != pawn && x != other && !x.NonHumanlikeOrWildMan());
+            foreach(Pawn disturber in disturbingPawns)
+            {
+                if (GenSight.LineOfSight(disturber.Position,cell,disturber.Map))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static IEnumerable<IntVec3> FindPrivateCellsFor(Pawn pawn, Pawn other, int dist)
+        {
+            Map map = pawn.Map;
+            return CellQuery.GetRandomCellSampleAround(pawn, dist, dist).Where(x => x.Standable(map) && x.GetDangerFor(pawn,map) == Danger.None && x.InAllowedArea(pawn) && x.InAllowedArea(other) && IsCellPrivateFor(x,pawn,other));
+
+        }
         public static Room FindNearbyPrivateRoom(Pawn pawn)
         {
             Region currentRegion = RegionAndRoomQuery.GetRegion(pawn);

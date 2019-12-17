@@ -435,6 +435,14 @@ namespace Gradual_Romance
         public static float CalculateFactor(Pawn observer, Pawn assessed, AttractionFactorDef attractionFactor)
         {
             AttractionCalculator calculator = attractionFactor.calculator;
+            if (attractionFactor.needsSight && observer.health.capacities.GetLevel(PawnCapacityDefOf.Sight) <= .1f)
+            {
+                return 1f;
+            }
+            if (attractionFactor.needsHearing && observer.health.capacities.GetLevel(PawnCapacityDefOf.Hearing) <= .1f)
+            {
+                return 1f;
+            }
             if (attractionFactor.requiredTraits.Count() > 0)
             {
                 bool hasRequiredTrait = false;
@@ -742,6 +750,21 @@ namespace Gradual_Romance
             if (assessed.gender == Gender.Female && IsExclusivelyAndrophilic(observer))
             {
                 return false;
+            }
+            if (observer.def.defName != assessed.def.defName)
+            {
+                if (GradualRomanceMod.extraspeciesRomance == GradualRomanceMod.ExtraspeciesRomanceSetting.NoXenoRomance)
+                {
+                    return false;
+                }
+                if (GradualRomanceMod.extraspeciesRomance == GradualRomanceMod.ExtraspeciesRomanceSetting.OnlyXenophiles && !ModHooks.IsXenophile(observer))
+                {
+                    return false;
+                }
+                if (ModHooks.IsXenophobe(observer))
+                {
+                    return false;
+                }
             }
             return true;
         }

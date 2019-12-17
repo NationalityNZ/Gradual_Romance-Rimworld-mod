@@ -8,7 +8,8 @@
           public RulePack intriguedByText;
         public RulePack reactionNegativeText;
         public RulePack reactionPositiveText;
-  
+          public bool needsSight = false;
+        public bool needsHearing = false;
   
   -->
 
@@ -19,6 +20,7 @@
     <label>beauty</label>
     <category>Physical</category>
     <calculatorClass>Gradual_Romance.AttractionCalculator_Beauty</calculatorClass>
+    <needsSight>True</needsSight>
     <intriguedByText>Intrigued_Beauty</intriguedByText>
     <reactionPositiveText>ReactionPositive_Beauty</reactionPositiveText>
     <reactionNegativeText>ReactionNegative_Beauty</reactionNegativeText>
@@ -247,6 +249,7 @@
     <label>scars</label>
     <category>Physical</category>
     <intriguedByText>Intrigued_Scars</intriguedByText>
+    <needsSight>True</needsSight>
     <reactionPositiveText>ReactionPositive_Scars</reactionPositiveText>
     <reactionNegativeText>ReactionNegative_Scars</reactionNegativeText>
     <highAttractionTraitModifiers>
@@ -1366,7 +1369,7 @@
     <reasonVeryHigh>{PAWN1_possessive} intoxicating musk</reasonVeryHigh>
     <reasonHigh>{PAWN1_possessive} lovely musk</reasonHigh>
     <reasonLow>{PAWN1_possessive} filthiness</reasonLow>
-    <reasonVeryLow>that {PAWN1_nameDef} wretched state of filthiness</reasonVeryLow>
+    <reasonVeryLow>{PAWN1_nameDef}'s wretched state of filthiness</reasonVeryLow>
   </Gradual_Romance.AttractionFactorDef>
   <RulePackDef>
     <defName>Intrigued_Hygiene</defName>
@@ -1397,6 +1400,7 @@
     <defName>Voice</defName>
     <label>voice</label>
     <category>Physical</category>
+    <needsHearing>true</needsHearing>
     <intriguedByText>Intrigued_Voice</intriguedByText>
     <reactionPositiveText>ReactionPositive_Voice</reactionPositiveText>
     <reactionNegativeText>ReactionNegative_Voice</reactionNegativeText>
@@ -1432,9 +1436,10 @@
   </RulePackDef>
 
   <Gradual_Romance.AttractionFactorDef>
-    <defName>Breathinging</defName>
+    <defName>Breathing</defName>
     <label>breathing</label>
     <category>Physical</category>
+    <needsHearing>true</needsHearing>
     <intriguedByText>Intrigued_Breathing</intriguedByText>
     <reactionPositiveText>ReactionPositive_Breathing</reactionPositiveText>
     <reactionNegativeText>ReactionNegative_Breathing</reactionNegativeText>

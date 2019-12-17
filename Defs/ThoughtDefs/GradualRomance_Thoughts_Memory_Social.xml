@@ -142,6 +142,20 @@
   </ThoughtDef>
 
   <ThoughtDef>
+    <defName>CheatedOnMeHighOpinion</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <durationDays>120</durationDays>
+    <stackLimit>300</stackLimit>
+    <stackLimitForSameOtherPawn>1</stackLimitForSameOtherPawn>
+    <stages>
+      <li>
+        <label>cheated on by {0}</label>
+        <baseOpinionOffset>-10</baseOpinionOffset>
+      </li>
+    </stages>
+    <thoughtToMake>CheatedOnMeToleratedMood</thoughtToMake>
+  </ThoughtDef>
+  <ThoughtDef>
     <defName>CheatedOnMeMoodHighOpinion</defName>
     <durationDays>25.0</durationDays>
     <stackLimit>10</stackLimit>
@@ -168,6 +182,50 @@
       <li>
         <label>my lover's lover</label>
         <baseOpinionOffset>-20</baseOpinionOffset>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+  <ThoughtDef>
+    <defName>CaughtFlirting</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <durationDays>10</durationDays>
+    <stackLimit>100</stackLimit>
+    <nullifyingTraits>
+      <li>Polygamous</li>
+    </nullifyingTraits>
+    <stackedEffectMultiplier>0.5</stackedEffectMultiplier>
+    <stackLimitForSameOtherPawn>5</stackLimitForSameOtherPawn>
+    <stages>
+      <li>
+        <label>caught flirting with someone else</label>
+        <baseOpinionOffset>-4</baseOpinionOffset>
+      </li>
+    </stages>
+    <modExtensions>
+      <li Class="Gradual_Romance.RomanticThoughtExtension">
+        <isReasonForBreakup>true</isReasonForBreakup>
+      </li>
+    </modExtensions>
+  </ThoughtDef>
+  <ThoughtDef>
+    <defName>CaughtFlirtingWithLover</defName>
+    <thoughtClass>Thought_MemorySocial</thoughtClass>
+    <durationDays>10</durationDays>
+    <stackLimit>100</stackLimit>
+    <nullifyingTraits>
+      <li>Polygamous</li>
+    </nullifyingTraits>
+    <stackedEffectMultiplier>0.5</stackedEffectMultiplier>
+    <stackLimitForSameOtherPawn>5</stackLimitForSameOtherPawn>
+    <stages>
+      <li>
+        <label>tried flirting with my lover</label>
+        <baseOpinionOffset>-3</baseOpinionOffset>
+      </li>
+      <li>
+        <label>caught flirting with my lover</label>
+        <baseOpinionOffset>-5</baseOpinionOffset>
       </li>
     </stages>
   </ThoughtDef>
