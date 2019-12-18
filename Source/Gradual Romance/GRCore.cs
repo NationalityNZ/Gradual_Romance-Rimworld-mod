@@ -10,6 +10,7 @@ using UnityEngine;
 using Verse;
 using Verse.AI;
 using HugsLib;
+using HugsLib.Settings;
 
 namespace Gradual_Romance
 {
@@ -33,6 +34,7 @@ namespace Gradual_Romance
 
         };
         public static GenderModeSetting genderMode;
+        private SettingHandle<GenderModeSetting> settingGenderMode;
         public static Gender AlteredGender()
         {
             return alteredGender;
@@ -45,8 +47,10 @@ namespace Gradual_Romance
 
         };
         public static AttractionCalculationSetting AttractionCalculation = AttractionCalculationSetting.Complex;
+        private SettingHandle<AttractionCalculationSetting> settingAttractionCalculation;
 
         private static int baseRomanceChance;
+        private SettingHandle<int> settingBaseRomanceChance;
         public static float BaseRomanceChance
         {
             get
@@ -55,6 +59,7 @@ namespace Gradual_Romance
             }
         }
         private static int baseBreakupChance;
+        private SettingHandle<int> settingBaseBreakupChance;
         public static float BaseBreakupChance
         {
             get
@@ -63,7 +68,7 @@ namespace Gradual_Romance
             }
         }
         private static int baseFlirtChance;
-
+        private SettingHandle<int> settingBaseFlirtChance;
         public static float BaseFlirtChance
         {
             get
@@ -73,7 +78,7 @@ namespace Gradual_Romance
         }
 
         private static int romanticSuccessRate;
-
+        private SettingHandle<int> settingRomanticSuccessRate;
         public static float RomanticSuccessRate
         {
             get
@@ -81,7 +86,9 @@ namespace Gradual_Romance
                 return Mathf.Max(0f, romanticSuccessRate) * 0.01f;
             }
         }
+
         private static int sweetheartRate;
+        private SettingHandle<int> settingSweetheartRate;
         public static float SweetheartRate
         {
             get
@@ -89,7 +96,9 @@ namespace Gradual_Romance
                 return Mathf.Max(0f, sweetheartRate) * 0.01f;
             }
         }
+
         private static int decayRate;
+        private SettingHandle<int> settingDecayRate;
         public static float DecayRate
         {
             get
@@ -110,7 +119,9 @@ namespace Gradual_Romance
         }
 
         public static KinseyDescriptor averageKinseyFemale;
+        private SettingHandle<KinseyDescriptor> settingAverageKinseyFemale;
         public static KinseyDescriptor averageKinseyMale;
+        private SettingHandle<KinseyDescriptor> settingAverageKinseyMale;
 
         public enum ExtraspeciesRomanceSetting
         {
@@ -121,41 +132,85 @@ namespace Gradual_Romance
         }
 
         public static ExtraspeciesRomanceSetting extraspeciesRomance;
-
+        private SettingHandle<ExtraspeciesRomanceSetting> settingExtraspeciesRomance;
 
         public static bool detailedAttractionLogs;
+        private SettingHandle<bool> settingDetailedAttractionLogs;
 
         public static bool rerollBeautyTraits;
-
+        private SettingHandle<bool> settingRerollBeautyTraits;
 
         public static bool polygamousWorld;
+        private SettingHandle<bool> settingPolygamousWorld;
+
         public static int numberOfRelationships;
+        private SettingHandle<int> settingNumberOfRelationships;
+
         public static bool informalRomanceLetters;
+        private SettingHandle<bool> settingInformalRomanceLetters;
+
         //public static bool useFacialAttractiveness;
         public static bool detailedDebugLogs;
+        private SettingHandle<bool> settingDetailedDebugLogs;
 
+        public override void SettingsChanged()
+        {
+            AttractionCalculation = settingAttractionCalculation.Value;
+            genderMode = settingGenderMode.Value;
+            averageKinseyFemale = settingAverageKinseyFemale.Value;
+            extraspeciesRomance = settingExtraspeciesRomance.Value;
+            averageKinseyMale = settingAverageKinseyMale.Value;
+            baseRomanceChance = settingBaseRomanceChance.Value;
+            baseBreakupChance = settingBaseBreakupChance.Value;
+            baseFlirtChance = settingBaseFlirtChance.Value;
+            romanticSuccessRate = settingRomanticSuccessRate.Value;
+            decayRate = settingDecayRate.Value;
+            numberOfRelationships = settingNumberOfRelationships.Value;
+            polygamousWorld = settingPolygamousWorld.Value;
+            rerollBeautyTraits = settingRerollBeautyTraits.Value;
+            informalRomanceLetters = settingInformalRomanceLetters.Value;
+            detailedDebugLogs = settingDetailedDebugLogs.Value;
+            detailedAttractionLogs = settingDetailedAttractionLogs.Value;
+        }
 
         public override void DefsLoaded()
         {
-            
-            AttractionCalculation = Settings.GetHandle("GRAttractionCalculationSetting", "AttractionCalculationSetting_title".Translate(), "AttractionCalculationSetting_desc".Translate(), AttractionCalculationSetting.Complex, null, "AttractionCalculationSetting_");
-            genderMode = Settings.GetHandle("GRGenderModeSetting", "GenderModeSetting_title".Translate(), "GenderModeSetting_desc".Translate(), GenderModeSetting.Vanilla, null, "GenderModeSetting_");
-            averageKinseyFemale = Settings.GetHandle("GRaverageKinseyFemale", "AverageKinseyFemale_title".Translate(), "AverageKinseyFemale_desc".Translate(), KinseyDescriptor.ExclusivelyHeterosexual, null, "KinseyDescriptor_");
-            averageKinseyMale = Settings.GetHandle("GRaverageKinseyMale", "AverageKinseyMale_title".Translate(), "AverageKinseyMale_desc".Translate(), KinseyDescriptor.ExclusivelyHeterosexual, null, "KinseyDescriptor_");
-            extraspeciesRomance = Settings.GetHandle("GRextraspeciesRomance","ExtraspeciesRomance_title".Translate(), "ExtraspeciesRomance_desc".Translate(), ExtraspeciesRomanceSetting.OnlyXenophobesNever, null, "ExtraspeciesRomanceDescriptor_");
-            baseRomanceChance = Settings.GetHandle<int>("GRbaseRomanceChance", "BaseRomanceChance_title".Translate(), "BaseRomanceChance_desc".Translate(), 100);
-            baseBreakupChance = Settings.GetHandle<int>("GRbaseBreakupChance", "BaseBreakupChance_title".Translate(), "BaseBreakupChance_desc".Translate(), 100);
-            baseFlirtChance = Settings.GetHandle<int>("GRbaseFlirtChance", "BaseFlirtChance_title".Translate(), "BaseFlirtChance_desc".Translate(), 100);
-            romanticSuccessRate = Settings.GetHandle<int>("GRromanticSuccessRate", "RomanceSuccessRate_title".Translate(), "RomanceSuccessRate_desc".Translate(), 100);
-            decayRate = Settings.GetHandle<int>("GRdecayRate", "DecayRate_title".Translate(), "DecayRate_desc".Translate(), 25);
-            numberOfRelationships = Settings.GetHandle<int>("GRnumberOfRelationships", "NumberOfRelationships_title".Translate(), "NumberOfRelationships_desc".Translate(), 3);
-            polygamousWorld = Settings.GetHandle<bool>("GRpolygamousWorld", "PolygamousWorld_title".Translate(), "PolygamousWorld_desc".Translate(), false);
-            rerollBeautyTraits = Settings.GetHandle<bool>("GRrerollBeautyTraits", "RerollBeautyTraits_title".Translate(), "RerollBeautyTraits_desc".Translate(),false);
-            informalRomanceLetters = Settings.GetHandle<bool>("GRinformalRomanceLetters", "InformalLetters_title".Translate(), "InformalLetters_desc".Translate(), true);
 
+            settingAttractionCalculation = Settings.GetHandle("GRAttractionCalculationSetting", "AttractionCalculationSetting_title".Translate(), "AttractionCalculationSetting_desc".Translate(), AttractionCalculationSetting.Complex, null, "AttractionCalculationSetting_");
+            settingGenderMode = Settings.GetHandle("GRGenderModeSetting", "GenderModeSetting_title".Translate(), "GenderModeSetting_desc".Translate(), GenderModeSetting.Vanilla, null, "GenderModeSetting_");
+            settingAverageKinseyFemale = Settings.GetHandle("GRaverageKinseyFemale", "AverageKinseyFemale_title".Translate(), "AverageKinseyFemale_desc".Translate(), KinseyDescriptor.ExclusivelyHeterosexual, null, "KinseyDescriptor_");
+            settingAverageKinseyMale = Settings.GetHandle("GRaverageKinseyMale", "AverageKinseyMale_title".Translate(), "AverageKinseyMale_desc".Translate(), KinseyDescriptor.ExclusivelyHeterosexual, null, "KinseyDescriptor_");
+            settingExtraspeciesRomance = Settings.GetHandle("GRextraspeciesRomance","ExtraspeciesRomance_title".Translate(), "ExtraspeciesRomance_desc".Translate(), ExtraspeciesRomanceSetting.OnlyXenophobesNever, null, "ExtraspeciesRomanceDescriptor_");
+            settingBaseRomanceChance = Settings.GetHandle<int>("GRbaseRomanceChance", "BaseRomanceChance_title".Translate(), "BaseRomanceChance_desc".Translate(), 100);
+            settingBaseBreakupChance = Settings.GetHandle<int>("GRbaseBreakupChance", "BaseBreakupChance_title".Translate(), "BaseBreakupChance_desc".Translate(), 100);
+            settingBaseFlirtChance = Settings.GetHandle<int>("GRbaseFlirtChance", "BaseFlirtChance_title".Translate(), "BaseFlirtChance_desc".Translate(), 100);
+            settingRomanticSuccessRate = Settings.GetHandle<int>("GRromanticSuccessRate", "RomanceSuccessRate_title".Translate(), "RomanceSuccessRate_desc".Translate(), 100);
+            settingDecayRate = Settings.GetHandle<int>("GRdecayRate", "DecayRate_title".Translate(), "DecayRate_desc".Translate(), 25);
+            settingNumberOfRelationships = Settings.GetHandle<int>("GRnumberOfRelationships", "NumberOfRelationships_title".Translate(), "NumberOfRelationships_desc".Translate(), 3);
+            settingPolygamousWorld = Settings.GetHandle<bool>("GRpolygamousWorld", "PolygamousWorld_title".Translate(), "PolygamousWorld_desc".Translate(), false);
+            settingRerollBeautyTraits = Settings.GetHandle<bool>("GRrerollBeautyTraits", "RerollBeautyTraits_title".Translate(), "RerollBeautyTraits_desc".Translate(),false);
+            settingInformalRomanceLetters = Settings.GetHandle<bool>("GRinformalRomanceLetters", "InformalLetters_title".Translate(), "InformalLetters_desc".Translate(), true);
             //useFacialAttractiveness = Settings.GetHandle<bool>("GRuseFacialAttractiveness", "UseFacialAttractiveness_title".Translate(), "UseFacialAttractiveness_desc".Translate(), false);
-            detailedDebugLogs = Settings.GetHandle<bool>("GRdetailedDebugLogs", "DetailedDebugLog_title".Translate(), "DetailedDebugLog_desc".Translate(), false);
-            detailedAttractionLogs = Settings.GetHandle<bool>("GRdetailedAttractionLogs", "DetailedAttractionLog_title".Translate(), "DetailedAttractionLog_desc".Translate(), false);
+            settingDetailedDebugLogs = Settings.GetHandle<bool>("GRdetailedDebugLogs", "DetailedDebugLog_title".Translate(), "DetailedDebugLog_desc".Translate(), false);
+            settingDetailedAttractionLogs = Settings.GetHandle<bool>("GRdetailedAttractionLogs", "DetailedAttractionLog_title".Translate(), "DetailedAttractionLog_desc".Translate(), false);
+
+            AttractionCalculation = settingAttractionCalculation.Value;
+            genderMode = settingGenderMode.Value;
+            averageKinseyFemale = settingAverageKinseyFemale.Value;
+            extraspeciesRomance = settingExtraspeciesRomance.Value;
+            averageKinseyMale = settingAverageKinseyMale.Value;
+            baseRomanceChance = settingBaseRomanceChance.Value;
+            baseBreakupChance = settingBaseBreakupChance.Value;
+            baseFlirtChance = settingBaseFlirtChance.Value;
+            romanticSuccessRate = settingRomanticSuccessRate.Value;
+            decayRate = settingDecayRate.Value;
+            numberOfRelationships = settingNumberOfRelationships.Value;
+            polygamousWorld = settingPolygamousWorld.Value;
+            rerollBeautyTraits = settingRerollBeautyTraits.Value;
+            informalRomanceLetters = settingInformalRomanceLetters.Value;
+            detailedDebugLogs = settingDetailedDebugLogs.Value;
+            detailedAttractionLogs = settingDetailedAttractionLogs.Value;
+
             List<FlirtStyleDef> allDefsListForReading = DefDatabase<FlirtStyleDef>.AllDefsListForReading;
             Logger.Message("Gradual Romance loaded with " + allDefsListForReading.Count().ToString() + " flirt styles.");
 

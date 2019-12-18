@@ -25,13 +25,21 @@ namespace Gradual_Romance
             {
                 return ThoughtState.Inactive;
             }
+
             bool multiplePartners = (from r in p.relations.PotentiallyRelatedPawns
                                          where RelationshipUtility.ShouldShareBed(p, r)
                                          select r).Count() > 1;
-            bool partnerBedInRoom = (from t in p.ownership.OwnedBed.GetRoom().ContainedBeds
+            bool partnerBedInRoom;
+            if (p.ownership.OwnedBed != null)
+            { 
+                partnerBedInRoom = (from t in p.ownership.OwnedBed.GetRoom().ContainedBeds
                                          where t.AssignedPawns.Contains(directPawnRelation.otherPawn)
                                          select t).Count() > 0;
-
+            }
+            else
+            {
+                partnerBedInRoom = false;
+            }
             if (directPawnRelation != null && p.ownership.OwnedBed != null && RelationshipUtility.IsPolygamist(p) && multiplePartners && partnerBedInRoom)
             {
                 return ThoughtState.Inactive;

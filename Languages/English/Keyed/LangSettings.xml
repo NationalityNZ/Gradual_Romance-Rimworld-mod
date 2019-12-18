@@ -11,15 +11,15 @@
   <GenderModeSetting_Vanilla>vanilla gendered behavior</GenderModeSetting_Vanilla>
   <GenderModeSetting_None>no gendered behavior</GenderModeSetting_None>
   <GenderModeSetting_Inverse>reversed gendered behavior</GenderModeSetting_Inverse>
-  <AverageKinseyFemale_title>Male Average Sexuality</AverageKinseyFemale_title>
+  <AverageKinseyFemale_title>Female Average Sexuality</AverageKinseyFemale_title>
   <AverageKinseyFemale_desc>This defines the average sexuality of most women. If an alien race does not define their own average sexuality, Gradual Romance will use this instead. This overrides Psychology's kinsey generation setting.</AverageKinseyFemale_desc>
   <AverageKinseyMale_title>Male Average Sexuality</AverageKinseyMale_title>
   <AverageKinseyMale_desc>This defines the average sexuality of most men. If an alien race does not define their own average sexuality, Gradual Romance will use this instead. This overrides Psychology's kinsey generation setting.</AverageKinseyMale_desc>
   <ExtraspeciesRomance_title>Extraspecies Romance Mode</ExtraspeciesRomance_title>
   <ExtraspeciesRomance_desc>Defines how sapient extra-species romance works. "Never" means that extraspecies romance is impossible. "Xenophiles Only" restricts romances only to those with the Xenophile trait. "Only Xenophobes Never" means that only those with the Xenophobe trait will refuse extra-species romance, the default. "Captain Kirk" is like "Only Xenophobes Never", except that there are no attraction penalties for extra-species romance, making it a love-for-all.</ExtraspeciesRomance_desc>
-  <ExtraspeciesRomanceDescriptor_NoXenoRomance>Never</ExtraspeciesRomanceDescriptor_NoXenoRomance>
-  <ExtraspeciesRomanceDescriptor_OnlyXenophiles>Only Xenophiles</ExtraspeciesRomanceDescriptor_OnlyXenophiles>
-  <ExtraspeciesRomanceDescriptor_OnlyXenophobesNever>Only Xenophobes Never</ExtraspeciesRomanceDescriptor_OnlyXenophobesNever>
+  <ExtraspeciesRomanceDescriptor_NoXenoRomance>never</ExtraspeciesRomanceDescriptor_NoXenoRomance>
+  <ExtraspeciesRomanceDescriptor_OnlyXenophiles>only xenophiles</ExtraspeciesRomanceDescriptor_OnlyXenophiles>
+  <ExtraspeciesRomanceDescriptor_OnlyXenophobesNever>only xenophobes never</ExtraspeciesRomanceDescriptor_OnlyXenophobesNever>
   <ExtraspeciesRomanceDescriptor_CaptainKirk>Captain Kirk</ExtraspeciesRomanceDescriptor_CaptainKirk>
   <KinseyDescriptor_ExclusivelyHeterosexual>exclusively heterosexual</KinseyDescriptor_ExclusivelyHeterosexual>
   <KinseyDescriptor_MostlyHeterosexual>mostly heterosexual</KinseyDescriptor_MostlyHeterosexual>
