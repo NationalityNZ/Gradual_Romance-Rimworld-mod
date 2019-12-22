@@ -86,16 +86,18 @@ namespace Gradual_Romance
                 return 0f;
             }
             EmptyReasons();
-            recipientPhysicalAttraction = CalculateAndSort(AttractionFactorCategoryDefOf.Physical, initiator, recipient);
-            recipientRomanticAttraction = CalculateAndSort(AttractionFactorCategoryDefOf.Romantic, initiator, recipient);
-            recipientSocialAttraction = CalculateAndSort(AttractionFactorCategoryDefOf.Social, initiator, recipient);
-            initiatorCircumstances = CalculateAndSort(AttractionFactorCategoryDefOf.Circumstance, initiator, recipient);
+            AttractionFactorDef whoCares;
+            float currentAttraction = AttractionUtility.CalculateAttraction(initiator, recipient, false, false, out veryLowInitiatorReasons, out lowInitiatorReasons, out highInitiatorReasons, out veryHighInitiatorReasons, out whoCares);
+            recipientPhysicalAttraction = GRHelper.GRPawnComp(initiator).RetrieveAttractionForCategory(recipient, AttractionFactorCategoryDefOf.Physical);
+            recipientRomanticAttraction = GRHelper.GRPawnComp(initiator).RetrieveAttractionForCategory(recipient, AttractionFactorCategoryDefOf.Romantic);
+            recipientSocialAttraction = GRHelper.GRPawnComp(initiator).RetrieveAttractionForCategory(recipient, AttractionFactorCategoryDefOf.Social);
+
+            //initiatorCircumstances = CalculateAndSort(AttractionFactorCategoryDefOf.Circumstance, initiator, recipient);
             //if (intiatorFailureReasons.Count() > 0)
             //{
             //    EmptyReasons();
             //    return 0f;
             //}
-            float romanceChance = recipientPhysicalAttraction * recipientRomanticAttraction * recipientRomanticAttraction * initiatorCircumstances;
             float flirtFactor = 0.5f;
 
             List<Thought_Memory> memoryList = initiator.needs.mood.thoughts.memories.Memories;
@@ -111,7 +113,7 @@ namespace Gradual_Romance
             flirtFactor = Mathf.Max(flirtFactor, 0.05f);
             lastInitiator = initiator;
             lastRecipient = recipient;
-            return GradualRomanceMod.BaseFlirtChance * romanceChance * flirtFactor * BaseFlirtWeight;
+            return GradualRomanceMod.BaseFlirtChance * currentAttraction * flirtFactor * BaseFlirtWeight;
         }
         /*
         public float SuccessChance(Pawn initiator, Pawn recipient)
@@ -133,11 +135,18 @@ namespace Gradual_Romance
                 recipientSocialAttraction = CalculateAndSort(AttractionFactorCategoryDefOf.Social, initiator, recipient);
                 initiatorCircumstances = CalculateAndSort(AttractionFactorCategoryDefOf.Circumstance, initiator, recipient);
             }
+            AttractionFactorDef whoCares;
+            /*
             initiatorPhysicalAttraction = CalculateAndSort(AttractionFactorCategoryDefOf.Physical, recipient, initiator, false);
             initiatorRomanticAttraction = CalculateAndSort(AttractionFactorCategoryDefOf.Romantic, recipient, initiator, false);
             initiatorSocialAttraction = CalculateAndSort(AttractionFactorCategoryDefOf.Social, recipient, initiator, false);
             recipientCircumstances = CalculateAndSort(AttractionFactorCategoryDefOf.Circumstance, recipient, initiator, false);
-            float totalAttraction = recipientPhysicalAttraction * recipientRomanticAttraction * recipientSocialAttraction;
+            */
+            recipientCircumstances = AttractionUtility.CalculateAttractionCategory(AttractionFactorCategoryDefOf.Circumstance, recipient, initiator);
+            float totalAttraction = AttractionUtility.CalculateAttraction(recipient, initiator, false, false, out veryLowRecipientReasons, out lowRecipientReasons, out highRecipientReasons, out veryHighRecipientReasons, out whoCares);
+            initiatorPhysicalAttraction = GRHelper.GRPawnComp(recipient).RetrieveAttractionForCategory(initiator, AttractionFactorCategoryDefOf.Physical);
+            initiatorRomanticAttraction = GRHelper.GRPawnComp(recipient).RetrieveAttractionForCategory(initiator, AttractionFactorCategoryDefOf.Romantic);
+            initiatorSocialAttraction = GRHelper.GRPawnComp(recipient).RetrieveAttractionForCategory(initiator, AttractionFactorCategoryDefOf.Social);
             LogFlirt(initiator.Name.ToStringShort + "=>" + recipient.Name.ToStringShort + " attraction: physical " + recipientPhysicalAttraction.ToString() + ", romantic " + recipientRomanticAttraction.ToString() + ", social " + recipientSocialAttraction.ToString() + ".");
             List<FlirtStyleDef> allDefsListForReading = DefDatabase<FlirtStyleDef>.AllDefsListForReading;
             FlirtStyleDef flirtStyle;
@@ -200,6 +209,7 @@ namespace Gradual_Romance
             {
                 //revise to include flirt type
                 float chance = Mathf.Clamp01(GradualRomanceMod.RomanticSuccessRate * Mathf.Pow(initiatorPhysicalAttraction, flirtStyle.baseSexiness) * Mathf.Pow(initiatorRomanticAttraction, flirtStyle.baseRomance) * Mathf.Pow(initiatorSocialAttraction, flirtStyle.baseLogic) * recipientCircumstances * 0.65f);
+                Log.Message("Romance success chance: " + chance.ToString());
                 if (Rand.Value < chance)
                 {
                     flirtReaction = successfulFlirt;
@@ -490,13 +500,13 @@ namespace Gradual_Romance
                     log += flirtReaction.traitModifiers[i].trait.defName + " " + chance.ToString() + ", ";
                 }
             }
-            
+            /*
             if (flirtReaction.successful == true)
             {
                 chance *= initiator.GetStatValue(StatDefOf.SocialImpact);
                 log += "social impact: " + chance.ToString() + ", ";
-                chance *= recipientCircumstances;
-            }
+                //chance *= recipientCircumstances;
+            }*/
             log += "end.";
             LogFlirt(log);
             return chance;

@@ -49,6 +49,17 @@ namespace Gradual_Romance
         public static AttractionCalculationSetting AttractionCalculation = AttractionCalculationSetting.Complex;
         private SettingHandle<AttractionCalculationSetting> settingAttractionCalculation;
 
+        public enum SeductionModeSetting
+        {
+            NoRestriction,
+            RelationshipAndNonColonists,
+            OnlyRelationship,
+            NoSeduction
+
+        };
+        public static SeductionModeSetting SeductionMode = SeductionModeSetting.OnlyRelationship;
+        private SettingHandle<SeductionModeSetting> settingSeductionMode;
+
         private static int baseRomanceChance;
         private SettingHandle<int> settingBaseRomanceChance;
         public static float BaseRomanceChance
@@ -84,6 +95,26 @@ namespace Gradual_Romance
             get
             {
                 return Mathf.Max(0f, romanticSuccessRate) * 0.01f;
+            }
+        }
+
+        private static int baseSeductionChance;
+        private SettingHandle<int> settingBaseSeductionChance;
+        public static float BaseSeductionChance
+        {
+            get
+            {
+                return Mathf.Max(0f, baseSeductionChance) * 0.01f;
+            }
+        }
+
+        private static int minAttractionForSeduction;
+        private SettingHandle<int> settingMinAttractionForSeduction;
+        public static float MinAttractionForSeduction
+        {
+            get
+            {
+                return Mathf.Max(0f, minAttractionForSeduction) * 0.01f;
             }
         }
 
@@ -180,12 +211,15 @@ namespace Gradual_Romance
             settingGenderMode = Settings.GetHandle("GRGenderModeSetting", "GenderModeSetting_title".Translate(), "GenderModeSetting_desc".Translate(), GenderModeSetting.Vanilla, null, "GenderModeSetting_");
             settingAverageKinseyFemale = Settings.GetHandle("GRaverageKinseyFemale", "AverageKinseyFemale_title".Translate(), "AverageKinseyFemale_desc".Translate(), KinseyDescriptor.ExclusivelyHeterosexual, null, "KinseyDescriptor_");
             settingAverageKinseyMale = Settings.GetHandle("GRaverageKinseyMale", "AverageKinseyMale_title".Translate(), "AverageKinseyMale_desc".Translate(), KinseyDescriptor.ExclusivelyHeterosexual, null, "KinseyDescriptor_");
+            settingSeductionMode = Settings.GetHandle("GRseductionModeSetting", "SeductionModeSetting_title".Translate(), "SeductionModeSetting_desc".Translate(), SeductionModeSetting.OnlyRelationship, null, "SeductionModeDescriptor_");
             settingExtraspeciesRomance = Settings.GetHandle("GRextraspeciesRomance","ExtraspeciesRomance_title".Translate(), "ExtraspeciesRomance_desc".Translate(), ExtraspeciesRomanceSetting.OnlyXenophobesNever, null, "ExtraspeciesRomanceDescriptor_");
             settingBaseRomanceChance = Settings.GetHandle<int>("GRbaseRomanceChance", "BaseRomanceChance_title".Translate(), "BaseRomanceChance_desc".Translate(), 100);
             settingBaseBreakupChance = Settings.GetHandle<int>("GRbaseBreakupChance", "BaseBreakupChance_title".Translate(), "BaseBreakupChance_desc".Translate(), 100);
             settingBaseFlirtChance = Settings.GetHandle<int>("GRbaseFlirtChance", "BaseFlirtChance_title".Translate(), "BaseFlirtChance_desc".Translate(), 100);
+            settingBaseSeductionChance = Settings.GetHandle<int>("GRbaseSeductionChance", "BaseSeductionChance_title".Translate(), "BaseSeductionChance_desc".Translate(), 100);
             settingRomanticSuccessRate = Settings.GetHandle<int>("GRromanticSuccessRate", "RomanceSuccessRate_title".Translate(), "RomanceSuccessRate_desc".Translate(), 100);
             settingDecayRate = Settings.GetHandle<int>("GRdecayRate", "DecayRate_title".Translate(), "DecayRate_desc".Translate(), 25);
+            settingMinAttractionForSeduction = Settings.GetHandle<int>("GRminAttractionForSeduction", "MinAttraction_title".Translate(), "MinAttraction_desc".Translate(), 90);
             settingNumberOfRelationships = Settings.GetHandle<int>("GRnumberOfRelationships", "NumberOfRelationships_title".Translate(), "NumberOfRelationships_desc".Translate(), 3);
             settingPolygamousWorld = Settings.GetHandle<bool>("GRpolygamousWorld", "PolygamousWorld_title".Translate(), "PolygamousWorld_desc".Translate(), false);
             settingRerollBeautyTraits = Settings.GetHandle<bool>("GRrerollBeautyTraits", "RerollBeautyTraits_title".Translate(), "RerollBeautyTraits_desc".Translate(),false);
@@ -202,6 +236,7 @@ namespace Gradual_Romance
             baseRomanceChance = settingBaseRomanceChance.Value;
             baseBreakupChance = settingBaseBreakupChance.Value;
             baseFlirtChance = settingBaseFlirtChance.Value;
+            baseSeductionChance = settingBaseSeductionChance.Value;
             romanticSuccessRate = settingRomanticSuccessRate.Value;
             decayRate = settingDecayRate.Value;
             numberOfRelationships = settingNumberOfRelationships.Value;
@@ -210,6 +245,7 @@ namespace Gradual_Romance
             informalRomanceLetters = settingInformalRomanceLetters.Value;
             detailedDebugLogs = settingDetailedDebugLogs.Value;
             detailedAttractionLogs = settingDetailedAttractionLogs.Value;
+
 
             List<FlirtStyleDef> allDefsListForReading = DefDatabase<FlirtStyleDef>.AllDefsListForReading;
             Logger.Message("Gradual Romance loaded with " + allDefsListForReading.Count().ToString() + " flirt styles.");
@@ -378,6 +414,7 @@ namespace Gradual_Romance
         private static Dictionary<ThingDef, SimpleCurve> maleMaturityCurves = new Dictionary<ThingDef, SimpleCurve> { };
 
         private static Dictionary<ThingDef, SimpleCurve> femaleMaturityCurves = new Dictionary<ThingDef, SimpleCurve> { };
+
 
     }
 }

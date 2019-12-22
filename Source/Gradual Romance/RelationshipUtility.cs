@@ -449,7 +449,7 @@ namespace Gradual_Romance
         }
         public static int LevelOfTension(Pawn pawn, Pawn other)
         {
-            List<Thought_Memory> memories = pawn.needs.mood.thoughts.memories.Memories;
+            /*List<Thought_Memory> memories = pawn.needs.mood.thoughts.memories.Memories;
             int count = 0;
             for (int i = 0; i < memories.Count(); i++)
             {
@@ -457,8 +457,8 @@ namespace Gradual_Romance
                 {
                     count++;
                 }
-            }
-            return count;
+            }*/
+            return GRThoughtUtility.NumOfMemoriesOfDefWhereOtherPawnIs(pawn, other, ThoughtDefOfGR.SexualTension) + GRThoughtUtility.NumOfMemoriesOfDefWhereOtherPawnIs(pawn, other, ThoughtDefOfGR.RomanticTension) + GRThoughtUtility.NumOfMemoriesOfDefWhereOtherPawnIs(pawn, other, ThoughtDefOfGR.LogicalTension);
         }
         public static int LevelOfSexualTension(Pawn pawn, Pawn other)
         {

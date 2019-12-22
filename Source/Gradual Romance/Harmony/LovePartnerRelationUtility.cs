@@ -5,15 +5,16 @@ using System.Text;
 using Harmony;
 using RimWorld;
 using Verse;
+using Psychology;
 
 namespace Gradual_Romance.Harmony
 {
-    
+
     [HarmonyPatch(typeof(LovePartnerRelationUtility), nameof(LovePartnerRelationUtility.HasAnyLovePartner))]
     public static class GRHasAnyLovePartnerPatch
     {
         [HarmonyPostfix]
-        public static void GRHasAnyLovePartner (ref bool __result, Pawn pawn)
+        public static void GRHasAnyLovePartner(ref bool __result, Pawn pawn)
         {
             if (__result != true)
             {
@@ -143,6 +144,61 @@ namespace Gradual_Romance.Harmony
         public static void GRSecondaryRomanceChanceFactor(Pawn_RelationsTracker __instance, ref float __result, ref Pawn ___pawn, Pawn otherPawn)
         {
             __result = AttractionUtility.CalculateAttraction(___pawn, otherPawn, false, true);
+        }
+    }
+
+    [HarmonyPatch(typeof(LovePartnerRelationUtility), "LovinMtbSinglePawnFactor")]
+    public static class GRLovinMtbSinglePawnFactor
+    {
+        [HarmonyPrefix]
+        public static bool NewGRFormula(ref float __result, Pawn pawn)
+        {
+            float num = 1f;
+            num /= 1f - pawn.health.hediffSet.PainTotal;
+            float level = pawn.health.capacities.GetLevel(PawnCapacityDefOf.Consciousness);
+            if (level < 0.5f)
+            {
+                num /= level * 2f;
+            }
+            float sexDriveFactor;
+            if (PsycheHelper.PsychologyEnabled(pawn))
+            {
+                sexDriveFactor = PsycheHelper.Comp(pawn).Sexuality.AdjustedSexDrive;
+            }
+            else
+            {
+                sexDriveFactor = GenMath.FlatHill(0f, 0.75f, 1f, 2f, 3f, 0.2f, AgeCalculationUtility.GetMaturity(pawn));
+            }
+
+            __result = num / sexDriveFactor;
+
+            return false;
+        }
+    }
+
+    [HarmonyPatch(typeof(JobDriver_Lovin), "GenerateRandomMinTicksToNextLovin")]
+    public static class GRGenerateRandomMinTicksToNextLovin
+    {
+        [HarmonyPrefix]
+        public static bool GRNextLovinFormula(Pawn pawn, ref int __result)
+        {
+
+            if (DebugSettings.alwaysDoLovin)
+            {
+                __result = 100;
+            }
+            else
+            {
+                float num = AgeCalculationUtility.recoveryTimeByMaturity.Evaluate(AgeCalculationUtility.GetMaturity(pawn));
+                num = Rand.Gaussian(num, 0.3f);
+                if (num < 0.5f)
+                {
+                    num = 0.5f;
+                }
+                __result = (int)(num * 2500f);
+            }
+
+            return false;
         }
     }
 

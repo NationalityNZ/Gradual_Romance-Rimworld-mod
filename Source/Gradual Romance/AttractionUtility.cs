@@ -621,6 +621,16 @@ namespace Gradual_Romance
             return Mathf.Clamp(value,attractionFactor.minFactor, attractionFactor.maxFactor);
         }
 
+        public static float CalculateAttractionCategory(AttractionFactorCategoryDef category, Pawn observer, Pawn assessed)
+        {
+            List<AttractionFactorDef> veryHighFactors = new List<AttractionFactorDef>() { };
+            List<AttractionFactorDef> highFactors = new List<AttractionFactorDef>() { };
+            List<AttractionFactorDef> lowFactors = new List<AttractionFactorDef>() { };
+            List<AttractionFactorDef> veryLowFactors = new List<AttractionFactorDef>() { };
+            AttractionFactorDef reasonForInstantFailure = null;
+            return CalculateAttractionCategory(category, observer, assessed, out veryLowFactors, out lowFactors, out highFactors, out veryHighFactors, out reasonForInstantFailure);
+        }
+
         public static float CalculateAttractionCategory (AttractionFactorCategoryDef category, Pawn observer, Pawn assessed, out List<AttractionFactorDef> veryLowFactors, out List<AttractionFactorDef> lowFactors, out List<AttractionFactorDef> highFactors, out List<AttractionFactorDef> veryHighFactors, out AttractionFactorDef reasonForInstantFailure)
         {
             //Log.Message("Method start.");
@@ -708,16 +718,23 @@ namespace Gradual_Romance
             highFactors = new List<AttractionFactorDef>() { };
             veryHighFactors = new List<AttractionFactorDef>() { };
             reasonForInstantFailure = null;
-            float result = 1f;
+            float result = observer.GetComp<GRPawnComp>().RetrieveAttractionAndFactors(assessed, out veryLowFactors, out lowFactors, out highFactors, out veryHighFactors, formalRelationship, !attractionOnly);
+
             List<AttractionFactorCategoryDef> allCategories = DefDatabase<AttractionFactorCategoryDef>.AllDefsListForReading;
             
             foreach (AttractionFactorCategoryDef category in allCategories)
             {
+                /*
                 if (!formalRelationship && category.onlyForRomance)
                 {
                     continue;
                 }
                 if (attractionOnly && category.chanceOnly)
+                {
+                    continue;
+                }
+                */
+                if (!category.alwaysRecalculate)
                 {
                     continue;
                 }
@@ -733,7 +750,20 @@ namespace Gradual_Romance
                 }
 
             }
-
+            if (!formalRelationship)
+            {
+                veryHighFactors.RemoveAll(x => x.category.onlyForRomance);
+                highFactors.RemoveAll(x => x.category.onlyForRomance);
+                lowFactors.RemoveAll(x => x.category.onlyForRomance);
+                veryLowFactors.RemoveAll(x => x.category.onlyForRomance);
+            }
+            if (!attractionOnly)
+            {
+                veryHighFactors.RemoveAll(x => x.category.chanceOnly);
+                highFactors.RemoveAll(x => x.category.chanceOnly);
+                lowFactors.RemoveAll(x => x.category.chanceOnly);
+                veryLowFactors.RemoveAll(x => x.category.chanceOnly);
+            }
             return result;
         }
 
@@ -896,6 +926,71 @@ namespace Gradual_Romance
             float socialSkillFactor = Mathf.Clamp(Mathf.InverseLerp(4, 16, Mathf.Abs(initiator.skills.GetSkill(SkillDefOf.Social).Level - 20)), 0.01f, 2f);
             pressure *= socialSkillFactor;
             return Mathf.Clamp(pressure, 0.2f, 5f);
+        }
+
+        public static float PropensityToSeduce(Pawn pawn)
+        {
+            float propensity = 1f;
+            if (pawn.story.traits.HasTrait(TraitDefOfPsychology.Lecher))
+            {
+                propensity *= 1.5f;
+            }
+            if (pawn.story.traits.HasTrait(TraitDefOfPsychology.Prude))
+            {
+                propensity *= 0.5f;
+            }
+            if (pawn.story.traits.HasTrait(TraitDefOfPsychology.Codependent))
+            {
+                propensity *= 0.75f;
+            }
+            if (pawn.story.traits.HasTrait(TraitDefOfGR.Shy))
+            {
+                propensity *= 0.25f;
+            }
+            if (pawn.story.traits.HasTrait(TraitDefOfGR.Seductive))
+            {
+                propensity *= 2.5f;
+            }
+            if (PsycheHelper.PsychologyEnabled(pawn))
+            {
+                CompPsychology comp = PsycheHelper.Comp(pawn);
+                propensity *= comp.Psyche.GetPersonalityRating(PersonalityNodeDefOfGR.Adventurous) + 0.5f;
+                propensity *= comp.Psyche.GetPersonalityRating(PersonalityNodeDefOf.Extroverted) + 0.5f;
+                propensity *= comp.Psyche.GetPersonalityRating(PersonalityNodeDefOfGR.Confident) + 0.1f;
+                propensity *= 1.2f - comp.Psyche.GetPersonalityRating(PersonalityNodeDefOf.Pure);
+                propensity *= 1.2f - comp.Psyche.GetPersonalityRating(PersonalityNodeDefOfGR.Moralistic);
+                propensity *= comp.Sexuality.AdjustedSexDrive;
+            }
+            return propensity;
+        }
+        public static float PropensityToBeSeduced(Pawn pawn)
+        {
+            float propensity = 1f;
+            if (pawn.story.traits.HasTrait(TraitDefOfPsychology.Lecher))
+            {
+                propensity *= 1.5f;
+            }
+            if (pawn.story.traits.HasTrait(TraitDefOfPsychology.Prude))
+            {
+                propensity *= 0.5f;
+            }
+            if (pawn.story.traits.HasTrait(TraitDefOfPsychology.Codependent))
+            {
+                propensity *= 0.75f;
+            }
+            if (pawn.story.traits.HasTrait(TraitDefOfGR.Shy))
+            {
+                propensity *= 2f;
+            }
+            if (PsycheHelper.PsychologyEnabled(pawn))
+            {
+                CompPsychology comp = PsycheHelper.Comp(pawn);
+                propensity *= comp.Psyche.GetPersonalityRating(PersonalityNodeDefOfGR.Adventurous) + 0.5f;
+                propensity *= 1.5f - comp.Psyche.GetPersonalityRating(PersonalityNodeDefOfGR.Confident);
+                propensity *= 1.5f - comp.Psyche.GetPersonalityRating(PersonalityNodeDefOf.Pure);
+                propensity *= comp.Sexuality.AdjustedSexDrive;
+            }
+            return propensity;
         }
 
         ///////SOCIAL ATTRACTIVENESS////////

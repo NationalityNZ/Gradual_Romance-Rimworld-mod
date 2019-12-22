@@ -50,7 +50,7 @@ namespace Gradual_Romance
                 return false;
             }
             //TODO - Revise to reflect lovin'
-            if (RelationshipUtility.LevelOfTension(pawn, other) <= 0)
+            if (RelationshipUtility.LevelOfTension(pawn, other) == 0)
             {
                 return true;
             }

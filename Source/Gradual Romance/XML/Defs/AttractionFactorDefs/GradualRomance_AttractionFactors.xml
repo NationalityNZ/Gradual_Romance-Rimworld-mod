@@ -393,7 +393,7 @@
     <defName>ReactionPositive_Body</defName>
     <rulePack>
       <rulesStrings>
-        <li>sent->[RECIPIENT_pronoun] was mostly intrigued by [INTIATOR_possessive] sexy body.</li>
+        <li>sent->[RECIPIENT_pronoun] was mostly intrigued by [INITIATOR_possessive] sexy body.</li>
       </rulesStrings>
     </rulePack>
   </RulePackDef>

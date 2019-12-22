@@ -20,5 +20,7 @@ namespace Gradual_Romance
         public static TraitDef MelodicVoice;
 
         public static TraitDef Jealous;
+
+        public static TraitDef Seductive;
     }
 }

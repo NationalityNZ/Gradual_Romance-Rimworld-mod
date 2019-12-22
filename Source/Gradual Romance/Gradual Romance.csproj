@@ -98,6 +98,8 @@
     <Compile Include="GRThoughtUtility.cs" />
     <Compile Include="Harmony\PawnGenerator.cs" />
     <Compile Include="Harmony\Psychology_Patches.cs" />
+    <Compile Include="Interactions\InteractionWorker_Seduce.cs" />
+    <Compile Include="JobGiver_Seduce.cs" />
     <Compile Include="ModdingHooks.cs" />
     <Compile Include="RomanticThoughtExtension.cs" />
     <Compile Include="ThoughtDetector.cs" />

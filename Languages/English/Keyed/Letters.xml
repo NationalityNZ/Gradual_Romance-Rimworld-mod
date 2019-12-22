@@ -26,5 +26,7 @@
   <NewFlameLabel>New Flames</NewFlameLabel>
   <NewDarlingText>{PAWN1_nameDef and {PAWN2_nameDef} both share the tenderest feelings for one another. They would be the best of friends - but it's clear there is more to them than friendship, yet they lack physical chemistry. </NewDarlingText>
   <NewDarlingLabel>New Darlings</NewDarlingLabel>
+  <RelationshipDecays_label>Relationship Decays</RelationshipDecays_label>
+  <RelationshipDecays_text>{0_nameDef} and {1_nameDef} have not interacted romantically in some time, and the spark between them has fully faded. {0_nameDef} is no longer {1_nameDef}'s {2}.</RelationshipDecays_text>
   <AND>and</AND>
 </LanguageData>
